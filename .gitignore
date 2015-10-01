@@ -1,0 +1,9 @@
+/papers
+*.log
+*.aux
+*.out
+*.snm
+*.toc
+*.nav
+/slides/auto
+/slides/tum.png

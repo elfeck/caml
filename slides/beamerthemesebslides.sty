@@ -1,0 +1,35 @@
+\mode<presentation>
+
+\useoutertheme{sebslides}
+
+% color definitions
+\definecolor{uipaleblue}{RGB}{96,123,139}
+\definecolor{uipoppy}{RGB}{225,64,0}
+
+% set the title color
+\setbeamercolor{title}{fg=uipoppy}
+\setbeamercolor{subtitle}{fg=uipaleblue}
+
+% set colors for specific elements
+\setbeamercolor{block}{fg=uipoppy}
+\setbeamercolor{block title}{fg=uipoppy}
+\setbeamercolor{block item}{fg=uipaleblue}
+\setbeamercolor{itemize item}{fg=uipaleblue}
+\setbeamercolor{itemize subitem}{fg=uipaleblue}
+\setbeamercolor{enumerate item}{fg=uipaleblue}
+
+% fonts
+\setbeamerfont{frametitle}{size=\Large,series=\bfseries}
+% frame title styling
+\setbeamertemplate{frametitle}
+{
+  \begin{beamercolorbox}[ht=1.5em,wd=\paperwidth,leftskip=10px]{frametitle}
+    \color{uipaleblue}
+    \strut\insertframetitle\strut
+  \end{beamercolorbox}
+}
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+\setbeamersize{frametitle=\huge}
+
+\mode<all>
