@@ -1,0 +1,73 @@
+\documentclass[unknownkeysallowed]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{hyperref}
+\usepackage{booktabs, caption}
+\usepackage{color}
+\usepackage{tikz}
+
+
+\beamertemplatenavigationsymbolsempty
+
+\mode<presentation>
+{
+  \usetheme{sebslides}
+  \setbeamertemplate{items}[circle]
+}
+
+\definecolor{uipoppy}{RGB}{225, 64, 5}
+\definecolor{tumblue}{RGB}{0,100,188}
+\definecolor{uipaleblue}{RGB}{96,123,139}
+\definecolor{uiblack}{RGB}{0, 0, 0}
+
+\newcommand{\topline}{%
+  \tikz[remember picture,overlay] {%
+    \draw[line width=0.35mm, uipaleblue]
+    ([yshift=-1.2cm]current page.north west)
+    -- ([yshift=-1.2cm,xshift=\paperwidth]current page.north west);}}
+
+\title{Data Mining with Spare Grids}
+\subtitle{Seminar: Computational Aspects of Machine Learning}
+\author{Sebastian Kreisel}
+\date{\today}
+
+\begin{document}
+
+{
+\setbeamertemplate{footline}{}
+\begin{frame}
+  \maketitle
+  \vspace{15px}
+  \begin{center}
+    \color{tumblue}{\footnotesize{Technische Universität München}}\\
+    \vspace{6px}
+    \includegraphics[width=1cm]{tum}
+  \end{center}
+\end{frame}
+}
+\addtocounter{framenumber}{-1}
+
+\begin{frame}
+  \frametitle{Overview}
+  \topline
+  \vspace{-10px}
+  \begin{itemize}
+    \item Motivation for Sparse Grids
+      \vspace{8px}
+    \item Sparse Grids: Basics
+      \vspace{8px}
+    \item Sparse Grids: Machine Learning
+      \vspace{8px}
+    \item Examples with Data Sets
+      \vspace{8px}
+    \item Parallelization and Implementation
+  \end{itemize}
+\end{frame}
+
+\include{part_motivation}
+\include{part_fullgrid}
+\include{part_sparsebasics}
+
+\end{document}
