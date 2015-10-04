@@ -142,4 +142,3 @@ def singleBasis5():
 
 def hatfun(x, l = 0, i = 0):
     return max(1 - abs(pow(2, l) * x - i), 0)
-

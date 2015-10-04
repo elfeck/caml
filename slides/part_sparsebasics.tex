@@ -62,6 +62,110 @@
   \end{block}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sparse Grid -- Changes}
+    \begin{itemize}
+      \item No sum over levels
+      \item No tensor product over dimensions
+    \end{itemize}
+  \end{block}
+  \begin{block}{Instead}
+    \begin{itemize}
+      \item Combination of levels through all dimensions
+      \item Sum over those combinations (``subspaces'')
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Hirachical gridpoints}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_hirach1}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Hirachical subspaces}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_2dhats}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sparse grid -- Changes}
+    \begin{itemize}
+      \item Throwing away certain subspaces
+      \item Finding those is a \emph{a-priori} solvable optimization problem
+      \item The resulting gird is now \textbf{sparse}
+      \end{itemize}
+  \end{block}
+  \begin{block}{Profit}
+    \begin{itemize}
+      \item Reducing the computational effort ``a lot''
+      \item Maintaining ``high'' accuracy
+      \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{A \emph{sparse} grid}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_hirach2}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Boundry and smoothness}
+    \begin{itemize}
+      \item Boundries need special treatment
+      \item The function needs to be sufficient smooth \\
+        $D^2f$ need to be bounded
+      \end{itemize}
+  \end{block}
+  \begin{block}{Adaptivity}
+    \begin{itemize}
+      \item \emph{A-posteriori} modifications to better fit the function
+      \item Picking a single gridpoint and adding level of detail around it
+      \item Prone to overfitting and huge computational effort
+      \end{itemize}
+  \end{block}
+\end{frame}
 
 %%% Local Variables:
 %%% TeX-master: "slides"
