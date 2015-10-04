@@ -66,16 +66,9 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Sparse Grid -- Changes}
-    \begin{itemize}
-      \item No sum over levels
-      \item No tensor product over dimensions
-    \end{itemize}
-  \end{block}
-  \begin{block}{Instead}
+  \begin{block}{Basis function subspaces}
     \begin{itemize}
       \item Combination of levels through all dimensions
-      \item Sum over those combinations (``subspaces'')
     \end{itemize}
   \end{block}
 \end{frame}
@@ -166,6 +159,30 @@
       \end{itemize}
   \end{block}
 \end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Summary}
+    \begin{itemize}
+      \item Hirachial basis through grouping gridpoints into levels
+      \item Creating ``subspaces'' through combination of levels in dimensions
+      \item Selecting and combining subspaces
+      \end{itemize}
+  \end{block}
+  \begin{block}{To keep in mind}
+    \begin{itemize}
+      \item Smoothness requirement for $f(x)$
+      \item Boundry treatment
+      \item Accuracy--effort trade-off
+      \item Adaptivity options (\emph{a-posteriori})
+      \end{itemize}
+  \end{block}
+\end{frame}
+
+
 
 %%% Local Variables:
 %%% TeX-master: "slides"

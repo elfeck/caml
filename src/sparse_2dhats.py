@@ -3,12 +3,23 @@ import math
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
+#from mpl_toolkits.mplot3d import proj3d
+
+#def orthogonal_proj(zfront, zback):
+#    a = (zfront+zback)/(zfront-zback)
+#    b = -2*(zfront*zback)/(zfront-zback)
+#    return np.array([[1,0,0,0],
+#                        [0,1,0,0],
+#                        [0,0,a,b],
+#                        [0,0,0,zback]])
+#proj3d.persp_transformation = orthogonal_proj
 
 savedir = "../slides/images/"
 
 start = 0
 end = 1
 step = 0.0025
+maxl = 3
 
 
 xval = yval = np.arange(start, end + step, step)
@@ -50,6 +61,7 @@ def drawAll():
     f = plt.figure()
     k = 1
     maxl = 3
+    print("start")
     for i in range(1, maxl+1):
         for j in range(1, maxl+1):
             zmesh = get2dHats(i, j)
