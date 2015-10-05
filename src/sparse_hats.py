@@ -26,7 +26,7 @@ def drawHat(l, col, layout = 111, dsb = True):
 
     ys = []
     for g in gridPoints:
-        ys.append([hatfun(x, l, g) for x in xval])
+        ys.append([(1/3**l) * hatfun(x, l, g) for x in xval])
 
     for y in ys:
         plt.plot(xval, y, color=col)
@@ -36,8 +36,8 @@ def drawHat(l, col, layout = 111, dsb = True):
 
 def drawHats():
     drawHat(1, "blue", 311)
-    drawHat(2, "blue", 312)
-    drawHat(3, "blue", 313)
+    drawHat(2, "red", 312)
+    drawHat(3, "grey", 313)
     #drawHat(4, "red", 414)
 
     plt.savefig(savedir + "sparse_hats.png", bbox_inches="tight")
@@ -45,11 +45,12 @@ def drawHats():
 
 
 def drawAllTogether():
-    sb = drawHat(1, "blue",  211)
+    sb = drawHat(1, "grey",  211)
     plt.xticks([(1/8) * i for i in range(1, 9)])
+    plt.yticks([])
     sb.set_xticklabels(range(1, 8))
     sb.set_yticklabels([])
-    drawHat(2, "blue", 414, False)
+    drawHat(2, "red", 414, False)
     drawHat(3, "blue", 414, False)
 
     sb2 = f.add_subplot(212)
@@ -59,6 +60,7 @@ def drawAllTogether():
         plt.plot(xval, y, color="blue")
 
     plt.xticks([(1/8) * i for i in range(1, 9)])
+    plt.yticks([])
     sb2.set_xticklabels(range(1, 8))
     sb2.set_yticklabels([])
 

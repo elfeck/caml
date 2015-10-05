@@ -66,6 +66,22 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
+  \begin{block}{Full grid discretization: Hirachial basis}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_1d}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
   \begin{block}{Basis function subspaces}
     \begin{itemize}
       \item Combination of levels through all dimensions
@@ -148,7 +164,7 @@
     \begin{itemize}
       \item Boundries need special treatment
       \item The function needs to be sufficient smooth \\
-        $D^2f$ need to be bounded
+        $D^2f$ needs to be bounded
       \end{itemize}
   \end{block}
   \begin{block}{Adaptivity}
