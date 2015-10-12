@@ -1,0 +1,67 @@
+\begin{frame}
+  \frametitle{Sparse Grids -- Data Mining}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Machine learning tasks}
+    \begin{itemize}
+      \item Classification
+      \item Regression
+    \end{itemize}
+  \end{block}
+  \begin{block}{Least squares}
+    $$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{N}\sum\limits_{i = 1}^{N}{(y_i - f(x_i))^2 \ + \ \lambda ||\nabla f||} \Bigg)$$
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Data Mining}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sparse grid setting}
+    \begin{itemize}
+    \item Do least squares in a sparse grid setting (``space'')
+    \item Discretize $\hat{c}$ using a sparse grid
+    \end{itemize}
+  \end{block}
+  \begin{block}{Least squares: Sparse gird discretized}
+    $$\hat{c} = \underset{\color{uipoppy}{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{N}
+    \sum\limits_{i = 1}^{N}{(y_i - \color{uipoppy}{\sum_j{\alpha_j}\phi_j(x_i)}\color{black})^2 \ + \ 
+      \lambda \color{uipoppy}{\sum_j{\alpha_j^2}}}\color{black} \Bigg)$$
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Data Mining}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Matrix formulation}
+    $$\big(\frac{1}{N} BB^T + \lambda C \big)\alpha = \frac{1}{N}By $$
+    \vspace{15px}
+    \[ \mathbb{R}^{M\times N} \ni B =
+      \begin{bmatrix}
+        \phi_1(x^{(1)}) & \dots & \phi_1(x^{(N)}) \\
+        \vdots & \ddots & \vdots \\
+        \phi_M(x^{(1)}) & \dots  & \phi_M(x^{(N)}) \\
+      \end{bmatrix}
+      \hspace{0.9cm}C = \lambda I
+    \]
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Data Mining}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Observations}
+    \begin{itemize}
+    \item $ BB^T \in \mathbb{R}^{M \times M}$ where $M =$ number of gridpoints
+    \item Scales only linear in $N =$ number of datapoints
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+%%% Local Variables:
+%%% TeX-master: "slides"
+%%% End:

@@ -1,9 +1,13 @@
-/papers
 *.log
 *.aux
 *.out
 *.snm
 *.toc
 *.nav
+*.bbl
+*.blg
+/report/auto
 /slides/auto
 /slides/tum.png
+/papers
+/tut

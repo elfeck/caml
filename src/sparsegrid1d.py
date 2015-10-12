@@ -27,6 +27,7 @@ class SparseGrid:
         subs = [Subspace(1, None)]
         subs.append(Subspace(2, subs[0]))
         subs.append(Subspace(3, subs[1]))
+        #subs.append(Subspace(4, subs[2]))
 
         xval = np.arange(start, end + step, step)
 
@@ -57,7 +58,7 @@ class SparseGrid:
             k += 1
         axs[-2].plot(xval, y_sum)
         axs[-2].text(0.8, 0.7, "hirac")
-        axs[-1].plot(xval, [fun(x) for x in xval])
+        axs[-1].plot(xval, [fun(x) for x in xval], color="red")
 
         #full
         ys_a = []
@@ -74,7 +75,7 @@ class SparseGrid:
         axs[-3].plot(xval, ys_sum, color="grey")
         axs[-3].text(0.8, 0.7, "nodal")
 
-        plt.savefig(savedir + "sparsegrid_1d.png", bbox_inches="tight")
+        plt.savefig(savedir + "sparsegrid_1d_1.png", bbox_inches="tight")
         plt.show()
 
 class Subspace:
@@ -82,24 +83,16 @@ class Subspace:
     def __init__(self, lx, parent):
         self.lx = lx
         self.gxs = [i for i in range(1, 2**lx) if i % 2 == 1]
-        self.parent = parent
 
         self.basis_x = []
 
         for gx in self.gxs:
             cx = self.getCX(gx)
-            ax = fun(cx)
-            hatSub = 0
-            p = parent
-            #if p != None:
-            while p is not None:
-                hatSub += p.directParentX(cx).evalAt(cx)
-                print(str(gx) + " (" + str(lx) + ") : " +
-                      str(p.directParentX(cx).evalAt(cx)))
-                p = p.parent
-            ax -= hatSub
 
-            self.basis_x.append(BasisFunction(gx, lx, ax))
+            bPar = None
+            if parent is not None:
+                bPar = parent.directParentX(cx)
+            self.basis_x.append(BasisFunction(gx, cx, lx, fun(cx), bPar))
 
     def getCX(self, g):
         return (1/(2**ml)) * 2**(ml - self.lx) * g
@@ -121,10 +114,18 @@ class Subspace:
 
 class BasisFunction:
 
-    def __init__(self, gp, l, alpha):
-        self.gp = gp
+    def __init__(self, gp, gc, l, feval, parent):
+        self.gp = gp # gridpoint in level
+        self.gc = gc # girdpoint coord overall
         self.l = l
-        self.alpha = alpha
+        self.parent = parent
+        self.feval = feval
+        self.alpha = feval
+
+        p = parent
+        while p is not None:
+            self.alpha -= p.evalAt(gc)
+            p = p.parent
 
     def evalAt(self, x):
         return self.alpha * max(1 - abs(pow(2, self.l) * x - self.gp), 0)

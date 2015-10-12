@@ -68,16 +68,26 @@ class Subspace:
         self.basis_x = []
         self.basis_y = []
 
+        self.parent = parent
+
         for gx in self.gxs:
             for gy in self.gys:
                 cx = self.getCX(gx)
                 cy = self.getCY(gy)
                 ax = ay = fun(cx, cy)
-                if lx > 1:
-                    ax -= parent.directParentX(gx).evalAt(cx)
-                if ly > 1:
-                    ay -= parent.directParentY(gy).evalAt(cy)
+                hatSubX = 0
+                hatSubY = 0
+                p = parent
+                while p is not None:
+                    hatSubX += p.directParentX(cx).evalAt(cx)
+                    p = p.parent
+                p = parent
+                while p is not None:
+                    hatSubY += p.directParentY(cy).evalAt(cy)
+                    p = p.parent
 
+                ax -= hatSubX
+                ay -= hatSubY
                 self.basis_x.append(BasisFunction(gx, lx, ax))
                 self.basis_y.append(BasisFunction(gy, ly, ay))
 
@@ -115,8 +125,8 @@ class Subspace:
         cB = None
         cD = 1000
         for b in self.basis_x:
-            if abs(b.gp - g) < cD:
-                cD = abs(b.gp - g)
+            if abs(self.getCX(b.gp) - g) < cD:
+                cD = abs(self.getCX(b.gp) - g)
                 cB = b
         return cB
 
@@ -124,8 +134,8 @@ class Subspace:
         cB = None
         cD = 1000
         for b in self.basis_y:
-            if abs(b.gp - g) < cD:
-                cD = abs(b.gp - g)
+            if abs(self.getCY(b.gp) - g) < cD:
+                cD = abs(self.getCY(b.gp) - g)
                 cB = b
         return cB
 

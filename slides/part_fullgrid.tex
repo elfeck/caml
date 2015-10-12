@@ -10,7 +10,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_1}
       \vspace{-12px}
-      \caption{$f(x) = 1 + \text{sin}(1.45\pi \cdot x)$}
+      \caption{$f(x) =\text{sin}(2\pi \cdot x)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -44,7 +44,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_3}
       \vspace{-12px}
-      \caption{$\phi(x - 2)$ with $\phi(x) = \text{max}(abs(1 - x), 0)$}
+      \caption{$\phi(x - 3)$ with $\phi(x) = \text{max}(abs(1 - x), 0)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -61,7 +61,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_4}
       \vspace{-12px}
-      \caption{$\alpha_3 \cdot \phi_3(x)$}
+      \caption{$\alpha_4 \cdot \phi_4(x)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -77,6 +77,23 @@
       \setbeamerfont{caption}{size=\footnotesize}
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_5}
+      \vspace{-12px}
+      \caption{$f(x) \approx \hat{f}(x) = \sum_i{\alpha_i \phi_i}$}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Full Grid Discretization}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sum over all basis functions}
+    \begin{figure}[!htp]
+
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/singlebasis_6}
       \vspace{-12px}
       \caption{$f(x) \approx \hat{f}(x) = \sum_i{\alpha_i \phi_i}$}
     \end{figure}

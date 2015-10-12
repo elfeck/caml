@@ -71,7 +71,24 @@
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
       \centering
-      \includegraphics[width=7.5cm]{images/sparsegrid_1d}
+      \includegraphics[width=7.5cm]{images/sparsegrid_1d_1}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Full grid discretization: Hirachial basis}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_1d_2}
       \vspace{-12px}
       \caption{}
     \end{figure}
@@ -84,7 +101,9 @@
   \vspace{-10px}
   \begin{block}{Basis function subspaces}
     \begin{itemize}
-      \item Combination of levels through all dimensions
+      \item Combination of levels and dimensions
+      \item Notion of hirachial subspaces
+      \item Defined by the levels of detail in all dimensions $(l_x, l_y, ...)$
     \end{itemize}
   \end{block}
 \end{frame}
