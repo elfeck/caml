@@ -1,6 +1,6 @@
 import numpy as np
 import math
-import matplotlib.pyplot as pltimport
+import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 savedir = "../slides/images/"
@@ -72,4 +72,4 @@ def drawAll2():
     plt.savefig(savedir + "sparsegrid_hirach2.png", bbox_inches="tight")
     plt.show()
 
-drawAll()
+drawAll2()

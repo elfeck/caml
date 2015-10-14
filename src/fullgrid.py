@@ -7,14 +7,18 @@ savedir = "../slides/images/"
 def fun(x):
     return math.sin(math.pi * 2 * x)
 
+def fun2(x):
+    return math.sin(math.pi * x)
+
 step = 0.001
 start = 0
 end = 1
 
 xval = np.arange(start, end + step, step)
 yval = [fun(x) for x in xval]
+yval2 = [fun2(x) for x in xval]
 
-gridpoints = [i for i in range(0, 8)]
+gridpoints = [i for i in range(1, 8)]
 
 def singleBasis1():
     f = plt.figure()
@@ -31,7 +35,7 @@ def singleBasis1():
 def singleBasis2():
     f = plt.figure()
     sb = f.add_subplot(111)
-    sb.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
+    sb.set_xticklabels([""] + [i for i in range(1, len(gridpoints))])
     #sb.set_yticklabels([])
     plt.axis([start, end, -1, 1])
     plt.xticks([(1/8.0) * g for g in gridpoints])
@@ -39,7 +43,7 @@ def singleBasis2():
     # function
     plt.plot(xval, yval, c="red")
 
-    rectpoints = [(1/8) * i for i in range(0, 8)]
+    rectpoints = [(1/8) * i for i in range(1, 8)]
     for r in rectpoints:
         plt.plot((r, r), (-1, 1), color="black")
 
@@ -49,7 +53,7 @@ def singleBasis2():
 def singleBasis3():
     f = plt.figure()
     sb = f.add_subplot(111)
-    sb.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
+    sb.set_xticklabels([""] + [i for i in range(1, len(gridpoints))])
     #sb.set_yticklabels([])
     plt.axis([start, end, -1, 1])
     plt.xticks([(1/8.0) * g for g in gridpoints])
@@ -73,7 +77,7 @@ def singleBasis3():
 def singleBasis4():
     f = plt.figure()
     sb = f.add_subplot(111)
-    sb.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
+    sb.set_xticklabels([""] + [i for i in range(1, len(gridpoints))])
     #sb.set_yticklabels([])
     plt.axis([start, end, -1, 1])
     plt.xticks([(1/8.0) * g for g in gridpoints])
@@ -110,7 +114,7 @@ def singleBasis4():
 def singleBasis5():
     f = plt.figure()
     sb = f.add_subplot(111)
-    sb.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
+    sb.set_xticklabels([""] + [i for i in range(1, len(gridpoints))])
     #sb.set_yticklabels([])
     plt.axis([start, end, -1, 1])
     plt.xticks([(1/8.0) * g for g in gridpoints])
@@ -167,8 +171,3 @@ def singleBasis6():
 
     plt.savefig(savedir + "singlebasis_6.png", bbox_inches="tight")
     plt.show()
-
-def hatfun(x, l = 0, i = 0):
-    return max(1 - abs(pow(2, l) * x - i), 0)
-
-singleBasis6()

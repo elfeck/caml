@@ -7,46 +7,42 @@
 \section{Introduction}
 Large datasets and high dimensional data remain challenging aspects of data
 mining. Even with growing computational power, many problems require
-specialized algorithms to archive accurate results within the given time and 
+specialized algorithms to archive accurate results within the given time and
 cost restraints.
 
 \par
 
 Sparse grids belong to a more general class of \emph{grid--based}
 discretization methods. These methods are primarily applied to
-problems including a large amount of datapoints and high--dimensional
-feature spaces:
+tackle scenarios with large amount of data points and high--dimensional
+feature spaces, posing these problems:
 \\
-Often, algorithms scale quadratic or worse in the number of datapoints and
+Often, algorithms scale quadratic or worse in the number of data points and
 thus quickly leading to time and cost related issues.
 High dimensionality introduces a problem widely known as the \emph{Curse of
 Dimensionality}, denoting an exponential dependency between computational
-effort and the number of dimensions.
+effort and the number of dimensions. \\
+%Grid--based methods are used to tackle these problems.
+By focusing on grid points instead
+of the data points them self grid--based methods allow for better handling of large amounts of data. 
+Sparse grids specifically combat the curse of dimensionality and mitigate
+the exponential dependency. \\
+Note also, that grid--based approaches are not applicable to data mining
+exclusively, but are also
+suited for a number of different areas including PDA, model order
+reduction or numerical quadrature.
 
 \par
 
-By focusing on gridpoints instead of the datapoints them self, grid--based
-methods are able to deal much better with large datasets. Making the grids
-\emph{sparse}, combats the curse of dimensionality while losing accuracy.
-
-\par
-
-Grid--based methods are not restricted to data mining but are also well
-suited for a number of different areas including PDA \ref{..}, model order
-reduction \ref{..} or numerical quadrature \ref{..}.
-
-
-In this report the sparse grid technique is applied to data mining
-investigating mitigation to the previously mentioned issues.
-First this report introduces grid discretization \ref{..} and sparse grids in
-general as well as related topics like spatial adaptivity.
-
+In this report the sparse grid technique is applied to data mining,
+investigating the mitigation--capabilities to the previously mentioned issues.
+First this report introduces grid discretization and sparse grids in
+general as well as related topics like spatial adaptivity. \\
 Then, sparse grids will be applied machine learning
-through modified \emph{least square estimation}. To confirm the capabilities
-of sparse grids widely applied, difficult,
-test--datasets for regression and classification like the
-\emph{checker--board} dataset will be used.
-
+through \emph{least square estimation}. To confirm the capabilities
+of sparse grids, the results of employing difficult,
+test--datasets for regression and classification (i.e.
+checker--board dataset) will be shown. \\
 Lastly  efficient implementations on modern systems and parallelization for
 sparse grids will be examined.
 
