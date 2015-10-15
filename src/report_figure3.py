@@ -10,7 +10,7 @@ if show_mode is False:
         inches_per_pt = 1.0/72.27        # Convert pt to inch
         golden_mean = (np.sqrt(5.0)-1.0)/2.0            # Aesthetic ratio
         fig_width = fig_width_pt*inches_per_pt*scale    # width in inches
-        fig_height = fig_width*0.9        # height in inches
+        fig_height = fig_width*0.7        # height in inches
         fig_size = [fig_width,fig_height]
         return fig_size
 
@@ -43,7 +43,7 @@ if show_mode is False:
         plt.clf()
         fig = plt.figure(figsize=figsize(width))
         return fig
-    f = newfig(0.4)
+    f = newfig(0.5)
 
 else:
     print("Show mode")
@@ -88,11 +88,18 @@ def drawAll2():
     #axs[0][3].axis("off")
     #axs[2][3].axis("off")
     k = 1
+    sumax = None
     for j in range(1, maxl+1):
-        for i in range(1, maxl+1):
+        for i in range(1, maxl+2):
+            ax = f.add_subplot(3, 4 ,k)
+            k+=1
+            if k % 4 == 1:
+                if k == 9:
+                    sumax = ax
+                else:
+                    ax.axis("off")
+                continue
             pts = gridpoints(i, j)
-            ax = f.add_subplot(3, 3 ,k)
-            k += 1
             if (i + j) > 4:
                 ax.plot(pts[0], pts[1], "o", ms=2, color="grey")
                 ax.set_axis_bgcolor((0.9, 0.9, 0.9))
@@ -106,13 +113,14 @@ def drawAll2():
     for i in range(1, maxl+1):
         for j in range(1, maxl+1):
             pts = gridpoints(i, j)
-            #ax = axs[1][3]
             #ax.set_title("Sum")
-            #if (i + j) <= 4:
-            #    ax.plot(pts[0], pts[1], "ob", ms=7)
-            #ax.axis([0, 8, 0, 8])
-            #ax.set_xticklabels([])
-            #ax.set_yticklabels([])
+            if (i + j) <= 4:
+                sumax.plot(pts[0], pts[1], "or", ms=4)
+            sumax.axis([0, 8, 0, 8])
+            sumax.set_xticklabels([])
+            sumax.set_yticklabels([])
+            sumax.set_xticks([])
+            sumax.set_yticks([])
 
 drawAll2()
 savefig(savedir + "figure_3")

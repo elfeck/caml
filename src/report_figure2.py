@@ -10,7 +10,7 @@ if show_mode is False:
         inches_per_pt = 1.0/72.27        # Convert pt to inch
         golden_mean = (np.sqrt(5.0)-1.0)/2.0            # Aesthetic ratio
         fig_width = fig_width_pt*inches_per_pt*scale    # width in inches
-        fig_height = fig_width*0.6
+        fig_height = fig_width*0.7
         # height in inches
         fig_size = [fig_width,fig_height]
         return fig_size
@@ -44,7 +44,7 @@ if show_mode is False:
         plt.clf()
         fig = plt.figure(figsize=figsize(width))
         return fig
-    f = newfig(0.6)
+    f = newfig(0.55)
 
 else:
     print("Show mode")

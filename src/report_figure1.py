@@ -10,7 +10,7 @@ if show_mode is False:
         inches_per_pt = 1.0/72.27        # Convert pt to inch
         golden_mean = (np.sqrt(5.0)-1.0)/2.0            # Aesthetic ratio
         fig_width = fig_width_pt*inches_per_pt*scale    # width in inches
-        fig_height = fig_width*0.3           # height in inches
+        fig_height = fig_width*0.6           # height in inches
         fig_size = [fig_width,fig_height]
         return fig_size
 
@@ -43,7 +43,7 @@ if show_mode is False:
         plt.clf()
         fig = plt.figure(figsize=figsize(width))
         return fig
-    f = newfig(1)
+    f = newfig(0.33)
 
 else:
     print("Show mode")
@@ -52,6 +52,7 @@ else:
 
 def savefig(filename):
     plt.savefig('{}.pgf'.format(filename), bbox_inches="tight")
+    plt.savefig('{}.png'.format(filename), bbox_inches="tight")
     plt.savefig('{}.pdf'.format(filename), bbox_inches="tight")
 
 #
@@ -87,8 +88,8 @@ yval2 = [fun2(x) for x in xval]
 
 gridpoints = [i for i in range(1, 8)]
 
-def plot_reportfig():
-    sb = f.add_subplot(121)
+def plot_reportfig_1():
+    sb = f.add_subplot(111)
     sb.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
     #sb.set_yticklabels([])
     plt.axis([start, end, lower, upper])
@@ -108,9 +109,11 @@ def plot_reportfig():
         ys = [hatfun(x, 3, g) for x in xval]
         ys_a = [alpha * hatfun(x, 3, g) for x in xval]
         c = "blue" if g % 2 == 0 else "red"
-        sb.plot(xval, ys, color="grey", linestyle="solid")
+        sb.axvline(point, color="grey")
+        #sb.plot(xval, ys, color="grey", linestyle="solid")
 
-    sb2 = f.add_subplot(122)
+def plot_reportfig_2():
+    sb2 = f.add_subplot(111)
     sb2.set_xticklabels([i for i in range(1, len(gridpoints) + 1)])
     #sb.set_yticklabels([])
     plt.axis([start, end, lower, upper])
@@ -130,15 +133,11 @@ def plot_reportfig():
             ys_sum[i] += ys_i[i]
     plt.plot(xval, ys_sum, color="blue")
 
-    mydpi = 96
     #f.set_size_inches(800/mydpi, 600/mydpi, dpi = mydpi)
 
 def hatfun(x, l = 0, i = 0):
     return max(1 - abs(pow(2, l) * x - i), 0)
 
-plot_reportfig()
-
-if show_mode:
-    f.show()
-else:
-    savefig(savedir + "figure_1")
+plot_reportfig_1()
+savefig(savedir + "figure_1_1")
+f.show()

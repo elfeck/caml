@@ -12,11 +12,14 @@ with, in case of supervised learning, an associated solution set $Y$.
 
 \begin{figure*}[t!]
   \centering
-  \input{images/figure_1.pgf}
+  \input{images/figure_1_1.pgf}
+  \input{images/figure_1_2.pgf}
+  \input{images/figure_1_3.pgf}
   \caption{A function $f$, red, to be discretized.
-    Seven grid points discretizing the space and their associated basis functions
-  (left). By $\alpha_i$ weighted basis functions, dashed, and sum thereof (right)
-  discretizing $f$.\label{fig:fig1}}
+    Seven grid points discretizing the space
+    (left). Full grid discretization by nodal basis (middle) and
+    hierarchical basis, scaled by $\alpha_i$ and $\alpha_{l,i}$
+    respectively (right).\label{fig:fig1}}
 \end{figure*}
 
 Grid-based approaches introduce an additional set $G$ of $N$
@@ -70,7 +73,7 @@ $j$. To improve readability the dimension-related index $j$ of $\phi_{i,j}$
 will be omitted in the following.
 
 \subsection{Hierarchical basis}
-Besides constructing the grid in the simple way as described in Sec.~\ref{subsec:fullgrid},
+Besides constructing the grid in the simple way described in Sec.~\ref{subsec:fullgrid},
 more sophisticated methods are available. In order to make a grid
 sparse and still keep a sufficient accuracy the following
 \emph{hierarchical basis} is introduced.
@@ -86,23 +89,39 @@ this forms the hierarchical basis in one dimension up to a level $n$.
 By disregarding every
 even grid point the local supports of basis functions on the \emph{same}
 level are mutually exclusive and for each value of $x$ exactly one basis
-function is not zero.
+function is not zero. \\
+A grid point is now referred to as grid point in the level $l$ with index $i$.
+Note, that the indices alone do not uniquely define a grid point (i.e. grid
+points of index $i = 1$ are element in every $G_l$). The same applies to
+the corresponding $\phi$ and $\alpha$.
 \par
 Taking the weighted sum over all levels and all grid points in one dimension
-$$ f(x) \approx \hat{f}(x) =  \sum_{l \leq n, i \in G_l}{\alpha_i\phi_{l,i}(x)}$$
-discretizes f on a full grid. In contrast to the conventional approach from
-Sec.~\ref{subsec:fullgrid} the hierarchical surpluses now are calculated using adjacent
-gird points $i - 2$ and $i + 2$ such that
-$$ \alpha_i = f\big(t(i)\big) - \frac{1}{2}\bigg(f\big(t(i - 2)\big) + f\big(t(i + 2)\big)\bigg) \ .$$
-To transfer from grid-index $i$ with corresponding level $l$ to $x$
-the function $t(i) = 2^{-l}i$ is used.
+$$ f(x) \approx \hat{f}(x) =  \sum_{l \leq n, i \in G_l}{\alpha_{l,i}\phi_{l,i}(x)}$$
+discretizes f on a full grid.
+
+In contrast to the conventional approach from
+Sec.~\ref{subsec:fullgrid} the surpluses now are calculated
+differently.
+Let $x_{l,i}$ be the $x$-value of the grid point given by $l$ and $i$. Then
+$$a_{l,i} = f(x_{l,i}) - \frac{f(x_{l,i} - 2^{-l}) + f(x_{l,i} + 2^{-l})}{2}$$
+is the \emph{hierarchical surplus} for the grid point $(l,i)$. The function
+value at the grid point is taken and the function values
+at neighbouring grid points are subtracted (``neighbouring''
+is disregarding $l$). For instance, for $\alpha_{2,1}$ we get $x_{2,1} =
+\frac{1}{4}$ and
+$$\alpha_{2,1} = f\Big(\frac{1}{4}\Big) - \frac{f\Big(\frac{1}{4} - 2^{-2}\Big) - f\Big(\frac{1}{4} + 2^{-2}\Big)}{2} \ .$$
 \par
-For $d > 1$ we combine one the dimensional basis functions
-to $d$ dimensional basis functions using the tensor product,
+For $d > 1$ we combine the one dimensional basis functions
+to $d$-dimensional basis functions using the tensor product,
 analogous to Sec.~\ref{subsec:fullgrid}. This is done for all possible combinations
-of $l$ and $i$ in all dimensions as shown for $d = 2$ in FIGURE.
-This process of building $d$-dimensional basis functions leads to a
-hierarchy of subspaces which, summed up and weighted, discretize $f$.
+of $l$ and $i$ in all dimensions.
+This process of building $d$-dimensional basis functions
+through combining over the level in different dimensions leads to a
+subspaces defined by the level-vector $\vec{l} = {l_x, l_y, \dots}$
+as shown for $d = 2$ in Fig.~\ref{fig:fig2}. \\
+Taking the sum $\sum_{l,i} \alpha_{l,i}\phi_{l,i}(x)$ over all
+$$\phi_{l,i}(\vec{x}) = \prod_j^d{\phi_{l,i,j}(x_j)}$$
+discretizes $f(\vec{x})$ on a hierarchical structured grid.
 \par
 However, this does not lead to a sparse gird immediately. So far the
 gridpoints only got regrouped and for a the maximum level $n$ this
@@ -120,21 +139,57 @@ and $d$, thus having no effect on mitigating the curse of dimensionality.
 \begin{figure*}[t!]
   \centering
   \includegraphics{images/figure_2.png}
-  \hspace{0cm}
   \includegraphics{images/figure_3.png}
-  \caption{.\label{fig:fig2}}
+  \caption{Hierarchical subspaces (left) and corresponding grid points
+    (right) ($d = 2$) with the last column being the complete sparse grid.
+    For the sparse grid omitted subspaces/grid points in grey.
+    \label{fig:fig2}}
 \end{figure*}
 
 \subsection{Sparse grid discretization}
 In order to make the hierarchical grid \emph{sparse}, we now disregard certain
-grid points with their associated subspaces defined by the
-combinations of $\phi_{i,l}$ in $d$ dimensions. FIGURE illustrates this. \\
-Which gridpoints contribute the least to the grid is a \emph{a-priori}
-solvable optimization problem. Thus, independend of $f$ all $\phi_{(l,i)}$
+subspaces with their associated  grid points. The goal is to reduced the total
+number of grid points by finding and disregarding those that contribute the
+least to the discretization of $f$.
+Which gridpoints that are is a \emph{a-priori}
+solvable optimization problem. Thus, independent of $f$ all $\phi_{l,i}$
 related to the subspaces in the
-lower right of the diagonal in FIGURE will be left out of the sum
+lower right of the diagonal in Fig.~\ref{fig:fig2} will be left out of the sum
 $$\hat{f}(x) =  \sum_{l \leq n, i \in G_l}{\alpha_i\phi_{l,i}(x)}$$
-from FIGURE.
+from Sec.~\ref{subsec:fullgrid}.
+\par
+By doing so, we reduced the total number of grid points drastically
+from $\mathcal{O}(2^{nd})$ to $\mathcal{O}(2^{n} \cdot n^{d-1})$ where $n$ is
+the maximal level in the hierarchical structure. The asymptotic error on the
+other hand only slightly increases from $\mathcal{O}(2^{-2n})$ to
+\mbox{$\mathcal{O}(2^{-2n} \cdot n^{d-1})$}. Tab.~\ref{tab:tab1}
+illustrates the quickly
+growing gap between the number of grid points in a full and sparse grid.
+\begin{table}[h]
+  \centering
+  \begin{tabular}{r | c | c | c | c | c | c}
+    d & 1 & 2 & 3 & 5 & 10 & 20 \\
+    \hline\hline
+    Full & 15 &  225 & 3375 & $>10^5$ & $> 10^{11}$ & $> 10^{23}$ \\
+    \hline
+    Sparse & 15 & 49 & 111 & 351 & 2001 & 13201 \\
+  \end{tabular}
+  \captionsetup{width=0.44\textwidth}
+  \caption{Number of grid points in a full and sparse grid
+    (without points on the boundaries)
+    with maximal level $n = 4$ and growing dimension $d$.\label{tab:tab1}}
+\end{table}\\
+It is important to note that the numbers in Tab.~\ref{tab:tab1} are taken
+for a sparse grid without points on the boundaries. In case the function
+to be discretized is not zero on the boundaries, such points become necessary.
+Treatment of the boundaries might require considerably
+more grid points. For further information please refer to REF.
+%Tab.~\ref{tab:tab1} also shows that sparse grids are not capable to fully
+%counteract the Curse of Dimensionality. Still, sparse grids provide a tool
+%to mitigate the problem and and make previously impossible tasks manageable.
+
+\subsection{Adaptive sparse grids}
+
 %\begin{itemize}
 %\item Disregarding subspaces
 %\item Trade-off
