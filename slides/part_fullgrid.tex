@@ -1,6 +1,6 @@
 \begin{frame}
   \frametitle{Full Grid Discretization}
-  \topline
+  \topline1
   \vspace{-10px}
   \begin{block}{1. Function to discretize}
     \begin{figure}[!htp]
@@ -27,7 +27,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_2}
       \vspace{-12px}
-      \caption{Eight centered gridpoints $i \in \{1..8\}$}
+      \caption{7 grid points $i \in \{1..7\}$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -44,7 +44,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_3}
       \vspace{-12px}
-      \caption{$\phi(x - 3)$ with $\phi(x) = \text{max}(abs(1 - x), 0)$}
+      \caption{$\phi(x - 3)$ with $\phi(x) = \text{max}(|1 - x|, 0)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -61,7 +61,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_4}
       \vspace{-12px}
-      \caption{$\alpha_4 \cdot \phi_4(x)$}
+      \caption{$\alpha_3 \cdot \phi_3(x)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -108,9 +108,9 @@
     \setbeamertemplate{enumerate items}[default]
     \begin{enumerate}
     \item A function $f(x)$ to discretize
-    \item Gridpoints indexed by $i \in \{1,2,\dots\}$
-    \item Basis/Ansatz functions; i.e. hat function $\phi(x)=\text{max}(1 - |x|, 0)$
-    \item Coefficients $\alpha_i$ (Surplusses)
+    \item Grid points indexed by $i \in \{1,2,\dots\}$
+    \item Basis functions; i.e. hat function $\phi(x)=\text{max}(1 - |x|, 0)$
+    \item Coefficients $\alpha_i$ (Surpluses)
     \end{enumerate}
     \vspace{10px}
     \begin{center}
@@ -125,7 +125,7 @@
   \vspace{-10px}
   \begin{block}{$d > 1$ dimensions}
     \begin{itemize}
-      \item Gridpoints as $d$--tuple, i.e. $(1,3,1)$
+      \item Grid points as $d$--tuple, i.e. $(1,3,1)$
       \item Tensor product over one dimensional basis functions
     \end{itemize}
     \begin{center}
@@ -146,14 +146,37 @@
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
       \minipage{0.5\textwidth}
-      \includegraphics[width=\linewidth]{images/2dgrid_1.png}
+      \includegraphics[width=\linewidth]{images/2dgrid_1_1.png}
       \vspace{-12px}
       \caption{$f(x) = \mathcal{N}(\vec{x})$}
       \endminipage
       \minipage{0.5\textwidth}
-      \includegraphics[width=\linewidth]{images/2dgrid_2.png}
+      \includegraphics[width=\linewidth]{images/2dgrid_2_1.png}
       \vspace{-12px}
-      \caption{Full grid discretization $\hat{f}_1(x_1) \cdot \hat{f}_2(x_2)$}
+      \caption{Full grid discretization $\hat{f}(\vec{x})$}
+      \endminipage
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Full Grid Discretization}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Full grid with $d = 2$}
+
+    \begin{figure}[!htb]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \minipage{0.5\textwidth}
+      \includegraphics[width=\linewidth]{images/2dgrid_1_2.png}
+      \vspace{-12px}
+      \caption{$f(x) = \text{sin}(x_1) \cdot \text{cos}(x_2)$}
+      \endminipage
+      \minipage{0.5\textwidth}
+      \includegraphics[width=\linewidth]{images/2dgrid_2_2.png}
+      \vspace{-12px}
+      \caption{Full grid discretization $\hat{f}(\vec{x})$}
       \endminipage
     \end{figure}
   \end{block}
@@ -165,12 +188,12 @@
   \vspace{-10px}
   \begin{block}{Summary}
     \begin{itemize}
-      \item Gridpoints $i \in \{1,2,\dots,N\}^d$ defining $\phi_i(x)$
+      \item Grid points $i \in \{1,2,\dots,N\}^d$ defining $\phi_i(x)$
         \vspace{5px}
         \item For $d > 1$: \textbf{product} of 1D basis functions: \\
           $$\phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i,j}(x_j)}$$
         \item \textbf{Sum} over all weighted basis functions: \\
-          $$\hat{f}(x) = \sum_{i=1}^N{\alpha_i \phi_i(x)}$$
+          $$\hat{f}(\vec{x}) = \sum_{i=1}^N{\alpha_i \phi_i(\vec{x})}$$
     \end{itemize}
 
   \end{block}

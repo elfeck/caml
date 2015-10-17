@@ -2,6 +2,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
 
 savedir = "../slides/images/"
 
@@ -13,6 +14,9 @@ def fun(x, y):
     mu = (end/2.0, end/2.0)
     var = 0.02
     return math.exp(-(pow((x - mu[0]), 2) + (pow((y - mu[1]), 2))) / (2 * var))
+
+def fun2(x, y):
+    return math.sin(math.pi * x) * math.cos(math.pi * y)
 
 def hatfun(x, l = 0, i = 0):
     return max(1 - abs(pow(2, l) * x - i), 0)
@@ -29,8 +33,9 @@ def gridFun():
     zs = np.array([fun(x,y) for x in xg for y in yg])
     zm = zs.reshape(xm.shape)
 
-    ax.plot_surface(xm, ym, zm)
-    plt.savefig(savedir + "2dgrid_1.png", bbox_inches="tight")
+    ax.plot_surface(xm, ym, zm, cmap=cm.Blues, cstride = 5,
+                    rstride=5)
+    plt.savefig(savedir + "2dgrid_1_1.png", bbox_inches="tight")
     plt.show()
 
 gridPoints = np.arange(0, 8, 1)
@@ -65,8 +70,9 @@ def gridFullgrid():
     for i in range(len(zs)):
         sum_z = np.add(sum_z, alphas[i] * zs[i])
     zm = np.reshape(sum_z, xm.shape)
-    ax.plot_surface(xm, ym, zm)
-    plt.savefig(savedir + "2dgrid_2.png", bbox_inches="tight")
+    ax.plot_surface(xm, ym, zm, cmap=cm.Blues, cstride = 5,
+                    rstride=5)
+    plt.savefig(savedir + "2dgrid_2_1.png", bbox_inches="tight")
     plt.show()
     return
 

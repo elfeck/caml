@@ -8,8 +8,19 @@
       \item Regression
     \end{itemize}
   \end{block}
+    \begin{block}{Training-data}
+    $$ X = \{x^{(i)} \ | \ x^{(i)} \in [0, 1]^d\}_{i = 1}^M$$
+    \vspace{0px}
+    $$Y = \{y^{(i)} \ | \ y^{(i)} \in \mathbb{R}\}_{i = 1}^M$$
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Data Mining}
+  \topline
+  \vspace{-10px}
   \begin{block}{Least squares}
-    $$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{N}\sum\limits_{i = 1}^{N}{(y_i - f(x_i))^2 \ + \ \lambda ||\nabla f||} \Bigg)$$
+    $$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{i = 1}^{M}{(y_i - f(x_i))^2 \ + \ \lambda ||\nabla f||} \Bigg)$$
   \end{block}
 \end{frame}
 
@@ -24,8 +35,8 @@
     \end{itemize}
   \end{block}
   \begin{block}{Least squares: Sparse gird discretized}
-    $$\hat{c} = \underset{\color{uipoppy}{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{N}
-    \sum\limits_{i = 1}^{N}{(y_i - \color{uipoppy}{\sum_j{\alpha_j}\phi_j(x_i)}\color{black})^2 \ + \ 
+    $$\hat{c} = \underset{\color{uipoppy}{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}
+    \sum\limits_{i = 1}^{M}{\Big(y_i - \color{uipoppy}{\sum_j{\alpha_j}\phi_j(x_i)}\color{black}\Big)^2 \ + \ 
       \lambda \color{uipoppy}{\sum_j{\alpha_j^2}}}\color{black} \Bigg)$$
   \end{block}
 \end{frame}
@@ -36,15 +47,14 @@
   \topline
   \vspace{-10px}
   \begin{block}{Matrix formulation}
-    $$\big(\frac{1}{N} BB^T + \lambda C \big)\alpha = \frac{1}{N}By $$
+    $$\big(\frac{1}{M} BB^T + \lambda I \big)\alpha = \frac{1}{M}By$$
     \vspace{15px}
-    \[ \mathbb{R}^{M\times N} \ni B =
+    \[ \mathbb{R}^{N\times M} \ni B =
       \begin{bmatrix}
-        \phi_1(x^{(1)}) & \dots & \phi_1(x^{(N)}) \\
+        \phi_1(x^{(1)}) & \dots & \phi_1(x^{(M)}) \\
         \vdots & \ddots & \vdots \\
-        \phi_M(x^{(1)}) & \dots  & \phi_M(x^{(N)}) \\
+        \phi_N(x^{(1)}) & \dots  & \phi_N(x^{(M)}) \\
       \end{bmatrix}
-      \hspace{0.9cm}C = \lambda I
     \]
   \end{block}
 \end{frame}
@@ -56,8 +66,9 @@
   \vspace{-10px}
   \begin{block}{Observations}
     \begin{itemize}
-    \item $ BB^T \in \mathbb{R}^{M \times M}$ where $M =$ number of gridpoints
-    \item Scales only linear in $N =$ number of datapoints
+    \item $ BB^T \in \mathbb{R}^{N \times N}$ where $N =$ number of grid points
+    \item Number of freedom not dependent on $M$
+    \item Linear scaling in $M$
     \end{itemize}
   \end{block}
 \end{frame}

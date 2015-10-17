@@ -1,12 +1,64 @@
 % Page 4
 \section{Sparse Grids in Machine Learning}
-\begin{itemize}
-\item Quick note on classification/regression
-\item Least squares
-\item Least squarse with sparse grids
-\item Matrix formulation
-\item Notes on matrix solving etc.
-\end{itemize}
+
+As mentioned in the introduction, data mining scenarios with large datasets
+and high-dimensional data are in general difficult to deal with.
+Areas that show these characteristics include engineering (e.g. heat-
+transfer modeling) \cite{disspeh},
+machine learning and data mining (e.g. estimation of cosmological redshifts
+and option pricing in finance) \cite{disspfl}.
+\par
+\subsection{Least square estimation}
+A commonly used method in machine learning is \emph{least square estimation}
+$$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{i = 1}^{M}{(y^{(i)} - f(x^{(i)}))^2 \ + \ \lambda R(f)} \Bigg)$$ \
+using the notation introduced in Sec.~\ref{sec:grid}. Using this formula we
+derive a estimator $\hat{c}$ that is the function which approximates the
+data $X \times Y$ with the least error (minimization over f).
+The term $R(f)$ is a regularization term to enforce smoothness. A common choice
+is the $L_2$-Norm of the gradient of f $R(f) = ||\nabla f||_2$.
+\par
+We will now use lest square estimation in a sparse grid setting. Intuitively,
+$\hat{c}$ and $f$ are functions discretized on a sparse grid and represented
+accordingly:
+$$\hat{c} = \underset{{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}
+\sum\limits_{i = 1}^{M}{\Big(y^{(j)} - {\sum_{j=1}^N{\alpha_j}\phi_j(x^{(j)})}\Big)^2 \ + \
+  \lambda {\sum_{j=1}^N{\alpha_j^2}}}\color{black} \Bigg) \ .$$
+Note, that for better readability the level-index $l$ is omitted here and
+we now simply enumerate all grid points, basis functions $\phi_j$ and surpluses
+$\alpha_j$
+ by the index $j \in \{1..N\}$.
+\subsection{Matrix formulation}
+We now minimize with respect to the hierarchical surpluses $\alpha_j$,
+that ultimately define the discretized version of $f$.
+Another choice for $R(f)$ when minimizing over coefficients is
+$\sum_j^N{\alpha_j^2}$ which simplifies the following (compared to the gradient).
+\par
+Minimizing with respect to alpha leads to a system of linear equations that
+can be formulated using the matrix expression
+$$\Big(\frac{1}{M} BB^T + \lambda I \Big)\vec{\alpha} = \frac{1}{M}B\vec{y} \
+.$$
+The matrix
+$$ \mathbb{R}^{N \times M} \ni B =
+\begin{bmatrix}
+  \phi_1(x^{(1)}) & \dots & \phi_1(x^{(M)}) \\
+  \vdots & \ddots & \vdots \\
+  \phi_N(x^{(1)}) & \dots  & \phi_N(x^{(M)}) \\
+\end{bmatrix}
+$$
+sets the grid points in relation to the data points in $X$. By solving this
+system we obtain the surplus-vector $\vec{\alpha}$ defining $\hat{c}$.
+
+The
+matrix product $BB^T \in R^{N \times N}$ demonstrates the the number of freedoms
+is not dependent on the number of data points. Thus, the computational effort
+scales only linearly in the number of data points $M$. \\
+%\begin{itemize}
+%\item Quick note on classification/regression
+%\item Least squares
+%\item Least squarse with sparse grids
+%\item Matrix formulation
+%\item Notes on matrix solving etc.
+%\end{itemize
 
 %%% Local Variables:
 %%% TeX-master: "report"

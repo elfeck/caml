@@ -13,9 +13,14 @@ ml = 3
 
 savedir = "../slides/images/"
 
-def fun(x):
+def fun1(x):
     return math.sin(2 * math.pi * x)
 
+
+def fun2(x):
+    return (3/(x + 1)**4) * math.sin(math.pi * x)
+
+fun = fun1
 
 def hatfun(x, l = 0, i = 0):
     return max(1 - abs(pow(2, l) * x - i), 0)
@@ -27,7 +32,7 @@ class SparseGrid:
         subs = [Subspace(1, None)]
         subs.append(Subspace(2, subs[0]))
         subs.append(Subspace(3, subs[1]))
-        #subs.append(Subspace(4, subs[2]))
+        subs.append(Subspace(4, subs[2]))
 
         xval = np.arange(start, end + step, step)
 
@@ -52,6 +57,7 @@ class SparseGrid:
             else:
                 y_sum = np.add(y_sum, s.get_sum(xval))
             axs[k].plot(xval, s.get_sum(xval))
+            axs[k].axhline(0, color="black")
             axs[k].axis([0, 1, -1, 1])
             t = axs[k].text(0.02, 0.7, "l=" + str(k+ 1))
             t.set_fontsize(14)
@@ -72,10 +78,10 @@ class SparseGrid:
         for ys_i in ys_a[1:]:
             ys_sum = np.add(ys_sum, ys_i)
         #\full
-        axs[-3].plot(xval, ys_sum, color="grey")
-        axs[-3].text(0.8, 0.7, "nodal")
+        #axs[-3].plot(xval, ys_sum, color="grey")
+        #axs[-3].text(0.8, 0.7, "nodal")
 
-        plt.savefig(savedir + "sparsegrid_1d_1.png", bbox_inches="tight")
+        plt.savefig(savedir + "sparsegrid_1d_2.png", bbox_inches="tight")
         plt.show()
 
 class Subspace:

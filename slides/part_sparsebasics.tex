@@ -2,7 +2,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachial Basis}
+  \begin{block}{Hierarchical Basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -18,15 +18,13 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachial basis (vs nodal basis)}
+  \begin{block}{Hierarchical basis (vs nodal basis)}
     \begin{itemize}
-      \item Grouping gridpoints into levels $l \in \{1,2,3\dots\}$
+      \item Grouping grid points into levels $l \in \{1,2,3\dots , n\}$
       \item Basis function by index \textbf{and} level: $\phi_{l,i}(x)$
     \end{itemize}
     \vspace{20px}
-    \begin{center}
-      $\hat{f}(x) = \sum_{l,i}{\ \alpha_{l,i} \cdot \phi_{l,i}(x)}$
-    \end{center}
+      $$\hat{f}(x) = \sum_{l \leq n,i \in G_l}{\ \alpha_{l,i} \cdot \phi_{l,i}(x)}$$
   \end{block}
 \end{frame}
 
@@ -34,7 +32,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachial Basis}
+  \begin{block}{Hierarchical Basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -50,7 +48,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachial vs. nodal  basis}
+  \begin{block}{Hierarchical vs. nodal basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -66,7 +64,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Full grid discretization: Hirachial basis}
+  \begin{block}{Full grid discretization: Hierarchical basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -83,7 +81,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Full grid discretization: Hirachial basis}
+  \begin{block}{Full grid discretization: Hierarchical basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -102,7 +100,7 @@
   \begin{block}{Basis function subspaces}
     \begin{itemize}
       \item Combination of levels and dimensions
-      \item Notion of hirachial subspaces
+      \item Notion of hierarchical subspaces
       \item Defined by the levels of detail in all dimensions $(l_x, l_y, ...)$
     \end{itemize}
   \end{block}
@@ -112,7 +110,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachical gridpoints}
+  \begin{block}{Hierarchical grid points}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -128,7 +126,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hirachical subspaces}
+  \begin{block}{Hierarchical subspaces}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -148,7 +146,7 @@
     \begin{itemize}
       \item Throwing away certain subspaces
       \item Finding those is a \emph{a-priori} solvable optimization problem
-      \item The resulting gird is now \textbf{sparse}
+      \item The resulting grid is now \textbf{sparse}
       \end{itemize}
   \end{block}
   \begin{block}{Profit}
@@ -179,17 +177,17 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Boundry and smoothness}
+  \begin{block}{Boundary and smoothness}
     \begin{itemize}
-      \item Boundries need special treatment
-      \item The function needs to be sufficient smooth \\
+      \item Boundaries need special treatment
+      \item The function needs to be sufficiently smooth \\
         $D^2f$ needs to be bounded
       \end{itemize}
   \end{block}
   \begin{block}{Adaptivity}
     \begin{itemize}
       \item \emph{A-posteriori} modifications to better fit the function
-      \item Picking a single gridpoint and adding level of detail around it
+      \item Picking a single grid point and adding level of detail around it
       \item Prone to overfitting and huge computational effort
       \end{itemize}
   \end{block}
@@ -202,7 +200,7 @@
   \vspace{-10px}
   \begin{block}{Summary}
     \begin{itemize}
-      \item Hirachial basis through grouping gridpoints into levels
+      \item Hierarchical basis through grouping grid points into levels
       \item Creating ``subspaces'' through combination of levels in dimensions
       \item Selecting and combining subspaces
       \end{itemize}
@@ -210,14 +208,12 @@
   \begin{block}{To keep in mind}
     \begin{itemize}
       \item Smoothness requirement for $f(x)$
-      \item Boundry treatment
+      \item Boundary treatment
       \item Accuracy--effort trade-off
       \item Adaptivity options (\emph{a-posteriori})
       \end{itemize}
   \end{block}
 \end{frame}
-
-
 
 %%% Local Variables:
 %%% TeX-master: "slides"
