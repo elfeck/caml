@@ -23,24 +23,24 @@ with, in case of supervised learning, an associated solution set $Y$
     respectively (right).\label{fig:fig1}}
 \end{figure*}
 
-Grid-based approaches introduce an additional set $G$ of $N$
+Grid-based approaches introduce an additional set $G$ consisting of $N$
 \emph{grid points} with
 $$ G = \{1,2,\dots,N\} \ .$$
 For each dimension of the feature space a separate $G$ (with possibly
 different $N$) is constructed dividing the space into a grid.
-This, by the grid \emph{discretized}, space
-will then be used instead of working with the data points in the original
-feature space directly.
+This discretized space
+will then be used instead of directly working with the data points in the original
+feature space.
 
 % Gridpoints, Basis function, surplus, sum
 % d > 1, tensor product
 \subsection{Full grid discretization}\label{subsec:fullgrid}
-In the following functions
+In the following, functions
 will be restricted to the unit hypercube
  $$ f: [0, 1]^d \rightarrow \mathbb{R} \ .$$
-To construct a \emph{full} grid we chose the grid points $G$ equidistant,
+To construct a \emph{full} grid, we chose the grid points $G$ equidistant
 without grid points lying on the borders. \\
-We first consider the case of a one-dimensional $f$ being discretized.
+We first consider the case of a one-dimensional $f$.
 Around each grid point $i$ we center a one-dimensional
 \emph{basis function}
 $$ \phi_i(x) = \max\{0, 1 - |(N + 1)x - i|\} \ .$$
@@ -62,49 +62,49 @@ Fig.~\ref{fig:fig1} illustrates this.
 
 \par
 
-For $f(\vec{x})$ with $d > 1$, grid point representation is extended to
-a $d$-tuple of indices, i.e. $(1,3,1)$ denoting the grid point with position
+For $f(\vec{x})$ with $d > 1$, the grid point representation is extended to
+a $d$-tuple of indices, e.g. $(1,3,1)$ denoting the grid point with position
 $x = 1, \ y = 3, \ z = 3$ in the dimensions $x,y,z$. \\
-The related basis function
+The related basis function gets extended to $d$ dimensions using the tensor
+product
 $$\phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i,j}(x_j)}$$
-gets extended to $d$ dimensions using the tensor
-product over the previously defined one-dimensional hat functions
+over the previously defined one-dimensional hat functions
 $\phi_{i,j}(x_j)$ with $x_j$ being the $j$-th element of $\vec{x}$ and
 $\phi_{i,j}$ denoting the basis-function of grid point $i$ in the dimension
 $j$ \cite{disspfl}.
-To improve readability the dimension-related index $j$ of $\phi_{i,j}$
+To improve readability, the dimension-related index $j$ of $\phi_{i,j}$
 will be omitted in the following.
 
 \subsection{Hierarchical basis}
 Besides constructing the grid in the simple way described in Sec.~\ref{subsec:fullgrid},
 more sophisticated methods are available. In order to make a grid
-sparse and still keep a sufficient accuracy the
+sparse and still keep a sufficient accuracy, the
 \emph{hierarchical basis} is introduced.
 \par
 We first examine the case $d = 1$.
-Let $l \in \{1,2,\dots\}$ be the \emph{level} with $|G| = 2^{(l-1)}$ associated
-grid points on each level. This level hierarchy groups grid points
+Let $l \in \{1,2,\dots\}$ be the \emph{level} with $|G_l| = 2^{(l-1)}$ associated
+grid points on each level. Through the level we group grid points
 into sets
 $$G_l = \{i \in \mathbb{N} \ | \ 1 \leq \ i \leq 2^l, \ i \ \text{odd}\} \ ,$$
-omitting every second grid point. Together the adjusted hat function
+omitting every second grid point. Together the adjusted hat functions
 $$\phi_{l,i}(x) = \max\{0, 1 - |2^lx - i|\} \ $$
-this forms the hierarchical basis in one dimension up to a level $n$ 
+form the hierarchical basis in one dimension up to a level $n$
 \cite{disspfl}.
 By disregarding every
-even grid point, the local supports of basis functions on the \emph{same}
-level are mutually exclusive and for each value of $x$ exactly one basis
+grid point with even index, the local supports of basis functions on the \emph{same}
+level are mutually exclusive and for every value of $x$ exactly one basis
 function is not zero. \\
-A grid point is now referred to as grid point in the level $l$ with index $i$.
+A grid point is now referred to as grid point of the level $l$ with index $i$.
 Note, that the indices alone do not uniquely define a grid point (i.e. grid
 points of index $i = 1$ are element in every $G_l$). The same applies to
 the corresponding $\phi$ and $\alpha$.
 \par
 Taking the weighted sum over all levels and all grid points in one dimension
 $$ f(x) \approx \hat{f}(x) =  \sum_{l \leq n, i \in G_l}{\alpha_{l,i}\phi_{l,i}(x)}$$
-discretizes f on a full grid \cite{disspfl}.
+discretizes $f$ on a full grid \cite{disspfl}.
 
 In contrast to the conventional approach from
-Sec.~\ref{subsec:fullgrid} the surpluses now are calculated
+Sec.~\ref{subsec:fullgrid}, the surpluses are now calculated
 differently.
 Let $x_{l,i}$ be the $x$-value of the grid point given by $l$ and $i$. Then
 $$a_{l,i} = f(x_{l,i}) - \frac{f(x_{l,i} - 2^{-l}) + f(x_{l,i} + 2^{-l})}{2}$$
@@ -116,22 +116,22 @@ For instance, for $\alpha_{2,1}$ we get $x_{2,1} =
 \frac{1}{4}$ and
 $$\alpha_{2,1} = f\Big(\frac{1}{4}\Big) - \frac{f\Big(\frac{1}{4} - 2^{-2}\Big) - f\Big(\frac{1}{4} + 2^{-2}\Big)}{2} \ .$$
 \par
-For $d > 1$ we combine the one dimensional basis functions
-to $d$-dimensional basis functions using the tensor product,
+For $d > 1$, we combine the one dimensional
+to $d$-dimensional basis functions using the tensor product
 analogous to Sec.~\ref{subsec:fullgrid}. This is done for all possible combinations
 of $l$ and $i$ in all dimensions.
 This process of building $d$-dimensional basis functions
-through combining over the level in different dimensions leads to a
+through combination over the level in different dimensions leads to
 subspaces defined by the level-vector $\vec{l} = (l_x, l_y, \dots)$
-as shown for $d = 2$ in Fig.~\ref{fig:fig2}. \\
+as illustrated in Fig.~\ref{fig:fig2}. \\
 Taking the sum $\sum_{l,i} \alpha_{l,i}\phi_{l,i}(x)$ over all
 $$\phi_{l,i}(\vec{x}) = \prod_j^d{\phi_{l,i,j}(x_j)}$$
 discretizes $f(\vec{x})$ on a hierarchical structured grid \cite{disspfl}.
 \par
 However, this does not lead to a sparse gird immediately. So far the
-grid points only got regrouped and for a the maximum level $n$ this
-results in $|G| = 2^{n} - 1$ basis functions for each dimension.
-This further leads to an exponential dependency of the number of grid points
+grid points only got regrouped and for a maximum level $n$. This
+results in $2^{n} - 1$ basis functions for each dimension.
+Further, this leads to an exponential dependency of the number of grid points
 and $d$, thus having no effect on mitigating the curse of dimensionality
 \cite{disspfl}.
 
@@ -156,7 +156,7 @@ and $d$, thus having no effect on mitigating the curse of dimensionality
 In order to make the hierarchical grid \emph{sparse}, we now disregard certain
 subspaces with their associated  grid points. The goal is to reduced the total
 number of grid points by finding and disregarding those that contribute the
-least to the discretization of $f$.
+least to the approximation of $f$.
 Which grid points that are is a \emph{a-priori}
 solvable optimization problem \cite{disspfl}. 
 Thus, independent of $f$ all $\phi_{l,i}$
@@ -187,7 +187,7 @@ growing gap between the number of grid points in a full and sparse grid.
     (without points on the boundaries)
     with maximal level $n = 4$ and growing dimension $d$.\label{tab:tab1}}
 \end{table}\\
-It is important to note that the numbers in Tab.~\ref{tab:tab1} are taken
+It is important to note, that the numbers in Tab.~\ref{tab:tab1} are taken
 for a sparse grid without points on the boundaries. In case the function
 to be discretized is not zero on the boundaries, such points become necessary.
 Treatment of the boundaries might require considerably
@@ -197,31 +197,31 @@ more grid points. For further information please refer to
 %counteract the Curse of Dimensionality. Still, sparse grids provide a tool
 %to mitigate the problem and and make previously impossible tasks manageable.
 
-\subsection{Adaptive sparse grids}
+\subsection{Adaptive sparse grids}\label{subsec:ada}
 
-Even though sparse grid offer an optimal choice for a general function $f$
-the discretization error is in praxis often unacceptable due to
+Even though sparse grids offer an optimal choice for a general function $f$,
+the discretization error is often unacceptable due to
 the properties of $f$ itself. If $f$ exhibits steep, complex
 or discontinuous areas, which the \emph{a-priori} distribution of grid points
 can not capture, additional grid points have to be added locally
 \cite{disspfl}.
 Two different approaches are possible: \\
-Either we test all potential grid points on how much they would contribute
-to the discretization of $f$ and chose the those that contribute most.
-Or we use information about $f$ itself, i.e. the location steep areas
+Either we test all potential grid points on how much they contribute
+to the discretization of $f$ and choose those that contribute most.
+Or we use information about $f$ itself, for example the location steep areas
 and refine the grid there.
 \par
 The first approach quickly becomes infeasible because in order to test
-a potential grid point a number of
+a potential grid point, a number of
 (possibly expensive) function evaluations of $f$ become necessary. Additionally
-the number of candidates is even in few dimension very high \cite{disspfl}. \\
+the number of candidates is already in few dimension very high \cite{disspfl}. \\
 The second approach requires to find criteria based on $f$ to
-find interesting areas to refine but is generally much better due to the
+find interesting areas to refine, but is generally much better due to the
 cost-related problems of the first approach \cite{disspfl}.
 \par
 The refinement process itself consist of finding a grid point to refine,
 then adding neighbouring grid points around it with $l + 1$ in each dimension.
-Often it is necessary to also add the hierarchical parents of the newly added
+Often it is necessary to also add the hierarchical parents of newly added
 grid points to ensure consistency required by many algorithms on the grid
 \cite{disspfl}.
 Fig.~REF illustrates this refinement process for one point.
