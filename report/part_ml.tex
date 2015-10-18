@@ -3,22 +3,27 @@
 
 As mentioned in the introduction, data mining scenarios with large datasets
 and high-dimensional data are in general difficult to deal with.
-Areas that show these characteristics include engineering (e.g. heat-
-transfer modeling) \cite{disspeh},
+Areas of application
+that show these characteristics include engineering (e.g. heat-transfer
+modeling) \cite{disspeh},
 machine learning and data mining (e.g. estimation of cosmological redshifts
-and option pricing in finance) \cite{disspfl}.
+and option pricing in finance) \cite{disspfl}. In this section
+we apply sparse grids to machine learning tasks
+(classification and regression) relevant for data mining.
 \par
-\subsection{Least square estimation}
-A commonly used method in machine learning is \emph{least square estimation}
-$$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{i = 1}^{M}{(y^{(i)} - f(x^{(i)}))^2 \ + \ \lambda R(f)} \Bigg)$$ \
-using the notation introduced in Sec.~\ref{sec:grid}. Using this formula we
-derive a estimator $\hat{c}$ that is the function which approximates the
-data $X \times Y$ with the least error (minimization over f).
+\subsection{Least squares estimation}
+A commonly used method in machine learning is \emph{least squares estimation}
+$$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{i = 1}^{M}{\Big(y^{(i)} - f(x^{(i)})\Big)^2 \ + \ \lambda R(f)} \Bigg)$$ \
+using the notation for trainingsdata 
+introduced in Sec.~\ref{sec:grid}. With this formula we
+derive a estimator $\hat{c}$ that is the function which models the
+data $X \times Y$ with the least error (minimization over $f$).
 The term $R(f)$ is a regularization term to enforce smoothness. A common choice
-is the $L_2$-Norm of the gradient of f $R(f) = ||\nabla f||_2$.
+is the $L_2$-Norm of the gradient of $f$, $R(f) = ||\nabla f||_2$.
 \par
-We will now use lest square estimation in a sparse grid setting. Intuitively,
-$\hat{c}$ and $f$ are functions discretized on a sparse grid and represented
+We will now use least squares estimation in a sparse grid setting. Intuitively,
+$f$ and ultimately $\hat{c}$
+ are functions discretized on a sparse grid and represented
 accordingly:
 $$\hat{c} = \underset{{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}
 \sum\limits_{i = 1}^{M}{\Big(y^{(j)} - {\sum_{j=1}^N{\alpha_j}\phi_j(x^{(j)})}\Big)^2 \ + \
@@ -27,12 +32,13 @@ Note, that for better readability the level-index $l$ is omitted here and
 we now simply enumerate all grid points, basis functions $\phi_j$ and surpluses
 $\alpha_j$
  by the index $j \in \{1..N\}$.
-\subsection{Matrix formulation}
 We now minimize with respect to the hierarchical surpluses $\alpha_j$,
-that ultimately define the discretized version of $f$.
-Another choice for $R(f)$ when minimizing over coefficients is
-$\sum_j^N{\alpha_j^2}$ which simplifies the following (compared to the gradient).
-\par
+which are the defining factor for $\hat{c}$.
+When minimizing with respect to coefficients a common choice for
+$R(f)$ is $\sum_j^N{\alpha_j^2}$. Compared to the gradient the
+expressions in the following get simplified using this regularization
+\cite{disspfl}.
+\subsection{Matrix formulation}
 Minimizing with respect to alpha leads to a system of linear equations that
 can be formulated using the matrix expression
 $$\Big(\frac{1}{M} BB^T + \lambda I \Big)\vec{\alpha} = \frac{1}{M}B\vec{y} \
@@ -46,12 +52,20 @@ $$ \mathbb{R}^{N \times M} \ni B =
 \end{bmatrix}
 $$
 sets the grid points in relation to the data points in $X$. By solving this
-system we obtain the surplus-vector $\vec{\alpha}$ defining $\hat{c}$.
-
+positive definite system we obtain the unique surplus-vector
+$\vec{\alpha}$ defining $\hat{c}$ \cite{disshei}.
+\par
 The
 matrix product $BB^T \in R^{N \times N}$ demonstrates the the number of freedoms
 is not dependent on the number of data points. Thus, the computational effort
-scales only linearly in the number of data points $M$. \\
+scales only linearly in the number of data points $M$\cite{disspfl}. Because
+the matrix $B$ might have a lot of entries and is not sparse, methods like
+Conjugate Gradients can be used to efficiently solve this system
+of linear equations \cite{disshei}.
+
+\subsection{Example datasets}
+
+
 %\begin{itemize}
 %\item Quick note on classification/regression
 %\item Least squares
