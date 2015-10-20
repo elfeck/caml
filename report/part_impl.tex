@@ -1,11 +1,33 @@
 % Page 5
 \section{Implementation of Sparse Grids}
-Many real-world problems require a large number grid points as mentioned in
+Many real-world problems require a large number of grid points as mentioned in
 Sec.~\ref{subsec:test}. Together with an enormous number of data points and
 high dimensionality, a lot of raw computational power is required. To keep
-the required time and cost as low as possible an efficient implementation of
+the required time and costs as low as possible, an efficient implementation of
 sparse grids is essential. Modern hardware offers many features to parallelize
-and vectorize computation 
+and vectorize computations allowing huge speed-ups if made use of.
+\par
+Implementing sparse grid in a computational efficient manner requires some
+thought. Due to the hierarchical basis and the tensor-product structure
+a recursive approach seems intuitive. However, this makes it
+very hard to parallelize because of unpredictable write-patterns to the
+memory which introduces the need of costly precautions \cite{disshei}.
+Furthermore, the hierarchical structure of the grid induces scattered
+read-accesses to the level and index-vectors of grid points leading to
+inefficient memory access and possibly unfavorable caching-behavior \cite{disshei}.
+\par
+Instead a more iterative oriented approach can be used. With two nested loops
+over all grid points and the dimensionality we compute $\alpha_j \phi_j(x^{(i)})$
+for each data point in the inner-most loop. Note, that this leads to a massive amount of
+unnecessary computations. This is due to the small support of basis functions
+with high level $l$ leading to zero-evaluations which contribute nothing to
+the final sum over all basis functions. But even though this iterative
+approach is worse computationally, it can make excellent use of parallelization
+and vectorization. For both data and grid points all data-dependencies are
+removed, eliminating critical sections and make full parallelization possible
+\cite{disshei}. Further, due to the sequential, linear access of memory
+(stored level-vectors, index-vectors, etc.) the required data can be
+ prefetched and removing overhead related to memory bandwidth \cite{disshei}.
 
 %%% Local Variables:
 %%% TeX-master: "report"

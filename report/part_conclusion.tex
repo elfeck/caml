@@ -1,8 +1,36 @@
 % Page 5 (, 6)
 \section{Conclusion}
-\begin{itemize}
-\item
-\end{itemize}
+Many data mining algorithms are based directly on the training data, often
+scaling poorly with regards to the number of data points.
+Discretization techniques use grid points and in addition to the data
+points to address this issue. By applying full-grid discretization, first
+with a equidistant base, then with the hierarchical basis,
+to $d$-dimensional functions we introduce the
+notion of grid-based methods but also showed that a full grid suffers from
+there Curse of Dimensionality.
+Sparse grid are able to remedy that by drastically reducing the number of
+grid points. Through sparse grid it is possible to obtain a optimal grid
+for a general $f$. Even though this might suffice for well-behaved functions,
+spatial adaptivity is necessary to model more difficult functions. By refining
+the grid in specific areas we are able to capture the structure of very steep
+and non-linear functions, often exhibited by machine learning scenarios.
+After establishing the sparse grids in general we applied the method to
+the data mining tasks classification and regression. Modifying least square
+estimation led to a system of linear equations in order to find the
+coefficients defining the discretized estimator. After confirming the
+performance of sparse grid by showing
+results of one artificial and one real-world test, efficient
+implementation got discussed briefly. Even though a computationally
+efficient implementation of sparse grids is able to exploit the hierarchical
+structure, an iterative approach performs better on modern hardware by
+trading unnecessary computations for
+optimal parallelization and vectorization.
+\par
+To conclude, sparse grids present a very viable approach to tackle large
+datasets and high dimensionality. Even though many subtle factors like
+boundary treatment, choice of basis function and refinement strategy have to be
+tuned, sparse grids can tackle a wide variety of problems and are already 
+employed successfully in real-world scenarios.
 
 %%% Local Variables:
 %%% TeX-master: "report"
