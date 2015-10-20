@@ -18,9 +18,9 @@ with, in case of supervised learning, an associated solution set $Y$
   \input{images/figure_1_3.pgf}
   \caption{A function $f$, red, to be discretized.
     Seven grid points discretizing the space
-    (left). Full grid discretization by nodal basis (middle) and
-    hierarchical basis, scaled by $\alpha_i$ and $\alpha_{l,i}$
-    respectively (right).\label{fig:fig1}}
+    (left). Full grid discretization by equidistant basis (middle) and
+    hierarchical basis (right), scaled by $\alpha_i$ and $\alpha_{l,i}$
+    respectively.\label{fig:fig1}}
 \end{figure*}
 
 Grid-based approaches introduce an additional set $G$ consisting of $N$
@@ -38,7 +38,7 @@ feature space.
 In the following, functions
 will be restricted to the unit hypercube
  $$ f: [0, 1]^d \rightarrow \mathbb{R} \ .$$
-To construct a \emph{full} grid, we chose the grid points $G$ equidistant
+To construct a \emph{full} grid, we choose the grid points $G$ equidistant
 without grid points lying on the borders. \\
 We first consider the case of a one-dimensional $f$.
 Around each grid point $i$ we center a one-dimensional
@@ -82,7 +82,7 @@ sparse and still keep a sufficient accuracy, the
 \emph{hierarchical basis} is introduced.
 \par
 We first examine the case $d = 1$.
-Let $l \in \{1,2,\dots\}$ be the \emph{level} with $|G_l| = 2^{(l-1)}$ associated
+Let $l \in \{1,2,\dots,n\}$ be the \emph{level} with $2^{(l-1)}$ associated
 grid points on each level. Through the level we group grid points
 into sets
 $$G_l = \{i \in \mathbb{N} \ | \ 1 \leq \ i \leq 2^l, \ i \ \text{odd}\} \ ,$$
@@ -101,17 +101,17 @@ the corresponding $\phi$ and $\alpha$.
 \par
 Taking the weighted sum over all levels and all grid points in one dimension
 $$ f(x) \approx \hat{f}(x) =  \sum_{l \leq n, i \in G_l}{\alpha_{l,i}\phi_{l,i}(x)}$$
-discretizes $f$ on a full grid \cite{disspfl}.
+discretizes $f$ on a full grid \cite{disspfl} (see Fig.~\ref{fig:fig1}).
 
 In contrast to the conventional approach from
 Sec.~\ref{subsec:fullgrid}, the surpluses are now calculated
 differently.
 Let $x_{l,i}$ be the $x$-value of the grid point given by $l$ and $i$. Then
 $$a_{l,i} = f(x_{l,i}) - \frac{f(x_{l,i} - 2^{-l}) + f(x_{l,i} + 2^{-l})}{2}$$
-is the \emph{hierarchical surplus} for the grid point $(l,i)$. The function
+describes the \emph{hierarchical surplus} for the grid point $(l,i)$. The function
 value at the grid point is taken and the function values
 at neighbouring grid points are subtracted (``neighbouring''
-is disregarding $l$) \cite{artbunlong}. 
+is disregarding $l$) \cite{artbunlong}.
 For instance, for $\alpha_{2,1}$ we get $x_{2,1} =
 \frac{1}{4}$ and
 $$\alpha_{2,1} = f\Big(\frac{1}{4}\Big) - \frac{f\Big(\frac{1}{4} - 2^{-2}\Big) - f\Big(\frac{1}{4} + 2^{-2}\Big)}{2} \ .$$
@@ -129,9 +129,9 @@ $$\phi_{l,i}(\vec{x}) = \prod_j^d{\phi_{l,i,j}(x_j)}$$
 discretizes $f(\vec{x})$ on a hierarchical structured grid \cite{disspfl}.
 \par
 However, this does not lead to a sparse gird immediately. So far the
-grid points only got regrouped and for a maximum level $n$. This
+grid points only got regrouped. This
 results in $2^{n} - 1$ basis functions for each dimension.
-Further, this leads to an exponential dependency of the number of grid points
+This in turn, leads to an exponential dependency of the number of grid points
 and $d$, thus having no effect on mitigating the curse of dimensionality
 \cite{disspfl}.
 
@@ -147,8 +147,8 @@ and $d$, thus having no effect on mitigating the curse of dimensionality
   \includegraphics{images/figure_2.png}
   \includegraphics{images/figure_3.png}
   \caption{Hierarchical subspaces (left) and corresponding grid points
-    (right) ($d = 2$) with the last column being the complete sparse grid.
-    For the sparse grid omitted subspaces/grid points in grey.
+    (right) with the last column being the complete sparse grid.
+    For the sparse grid omitted subspaces/grid points are colored grey.
     \label{fig:fig2}}
 \end{figure*}
 
@@ -162,9 +162,9 @@ solvable optimization problem \cite{disspfl}.
 Thus, independent of $f$ all $\phi_{l,i}$
 related to the subspaces in the
 lower right of the diagonal in Fig.~\ref{fig:fig2} will be left out of the sum
+from Sec.~\ref{subsec:fullgrid} \cite{disspfl, artbunshort}:
 $$\hat{f}(x) =  \sum_{\substack{l \leq n, i \in G_l\\
-    |l| \leq n + d - 1}}{\alpha_i\phi_{l,i}(x)}$$
-from Sec.~\ref{subsec:fullgrid} \cite{disspfl, artbunshort}.
+    |l| \leq n + d - 1}}{\alpha_i\phi_{l,i}(x)} \ .$$
 \par
 By doing so, we reduced the total number of grid points drastically
 from $\mathcal{O}(2^{nd})$ to $\mathcal{O}(2^{n} \cdot n^{d-1})$ where $n$ is
@@ -203,17 +203,18 @@ Even though sparse grids offer an optimal choice for a general function $f$,
 the discretization error is often unacceptable due to
 the properties of $f$ itself. If $f$ exhibits steep, complex
 or discontinuous areas, which the \emph{a-priori} distribution of grid points
-can not capture, additional grid points have to be added locally
+cannot capture, additional grid points have to be added locally
 \cite{disspfl}.
 Two different approaches are possible: \\
 Either we test all potential grid points on how much they contribute
 to the discretization of $f$ and choose those that contribute most.
-Or we use information about $f$ itself, for example the location steep areas
+Or we use information about $f$ itself, for example the location of
+steep areas
 and refine the grid there.
 \par
 The first approach quickly becomes infeasible because in order to test
 a potential grid point, a number of
-(possibly expensive) function evaluations of $f$ become necessary. Additionally
+(possibly expensive) function evaluations of $f$ become necessary. Additionally,
 the number of candidates is already in few dimension very high \cite{disspfl}. \\
 The second approach requires to find criteria based on $f$ to
 find interesting areas to refine, but is generally much better due to the
@@ -224,11 +225,27 @@ then adding neighbouring grid points around it with $l + 1$ in each dimension.
 Often it is necessary to also add the hierarchical parents of newly added
 grid points to ensure consistency required by many algorithms on the grid
 \cite{disspfl}.
-Fig.~REF illustrates this refinement process for one point.
+Fig.~\ref{fig:fig3} illustrates this refinement process for two points.
 \par
 Spatial adaptivity is crucial for applications in machine learning, due to
-often complex functions arising from regression or decision boundaries 
+often complex functions arising from regression or decision boundaries
 \cite{disspfl, artbunshort}.
+
+\begin{figure*}[t!]
+  \centering
+  \input{images/figure_4_0.pgf}
+  \hspace{20px}
+  \input{images/figure_4_1.pgf}
+  \hspace{20px}
+  \input{images/figure_4_2.pgf}
+  \captionsetup{width=0.65\textwidth}
+  \caption{Adative refinement of the grid points in red. One point
+    of a regular sparse grid with $n = 2$ (left) gets refined (middle)
+    followed by a second refinement, resulting in the grid on the right.
+    The second refinement requires the addition of the blue
+    colored hierarchical parents.
+    \label{fig:fig3}}
+\end{figure*}
 
 %\begin{itemize}
 %\item Disregarding subspaces
