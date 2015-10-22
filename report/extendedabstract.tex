@@ -16,10 +16,10 @@
   \huge{\textbf{Data Mining with Sparse Grids}} \\
   \vspace{6px}
   \large{Seminar: Computational Aspects of Machine Learning} \\
-  \vspace{15px}
+  \vspace{10px}
   Sebastian Kreisel
 \end{center}
-\vspace{30px}
+\vspace{20px}
 Datasets with large size and high-dimensional data pose a challenge even
 with the steadily growing computational power.
 Data mining algorithms often scale quadratic or worse in the number of
@@ -35,18 +35,18 @@ Making the grid sparse mitigates the exponential
 dependency between computational effort and dimensionality without
 major drawbacks in accuracy.
 \par
-This paper explores the sparse grids in the context of data mining.
+This paper explores sparse grids in the context of data mining.
 First, the core concepts of discretization will be explained by
 discussing full grid discretization of functions
 using equidistant grid points. However,
 this approach exhibits the Curse of Dimensionality and is thus not
-applicable to high-dimensional problems. To address that, a hierarchical
+applicable for high-dimensional data. To address that, a hierarchical
 structured grid is then examined and
-sparse grids are introduced which are able to deal with high
-dimensionality.
+sparse grids, which are able to deal with high
+dimensionality, are introduced.
 \par
 Through applying sparse grids,
-it is possible to find a optimal structured
+it is possible to find an optimal structured
 grid for a general function (a-priori). Although this might suffice to
 accurately discretize well-behaved functions, machine learning
 tasks often require additional care. By introducing spatial adaptivity
@@ -56,17 +56,24 @@ improves even in difficult scenarios.
 After these basic notions, sparse grids are
 applied to the data mining tasks classification and regression.
 The commonly used least squares
-estimation gets review and then modified to conform with the
-previously established formulation of sparse grids. In order to examine
+estimation gets reviewed and then modified to conform with the
+previously established formulation of sparse grids. This leads to a
+minimization problem with respect to the coefficients of basis functions.
+The
+problem can further
+be restated as a system of linear equations, setting the grid and
+data points in relation.
+In order to examine
 the performance of sparse grids, results of artificial and
-real-life data mining tests are presented.
+real-life data mining scenarios are presented confirming the capabilities of
+sparse grids to deal with large datasets and high dimensionality.
 \par
 In the last section the implementation of sparse grids on modern
 systems is discussed briefly. Due to the hierarchical structure some
 consideration has to go into an computationally efficient
 implementation allowing
 parallelization and architecture dependent optimizations.
-One approach presented, disregards the nested structure of a hierarchical grid
+One approach presented, disregards the nested structure of hierarchical grids
 and trades unnecessary computations for better parallelization with good
 results.
 \par
