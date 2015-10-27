@@ -1,8 +1,8 @@
 \begin{frame}
   \frametitle{Full Grid Discretization}
-  \topline1
+  \topline
   \vspace{-10px}
-  \begin{block}{1. Function to discretize}
+  \begin{block}{Function to discretize}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -10,7 +10,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_1}
       \vspace{-12px}
-      \caption{$f(x) =\text{sin}(2\pi \cdot x)$}
+      \caption{$f(x) =\text{sin}(2\pi x)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -19,7 +19,7 @@
   \frametitle{Full Grid Discretization}
   \topline
   \vspace{-10px}
-  \begin{block}{2. Full, regular grid}
+  \begin{block}{Full, regular grid}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -36,7 +36,7 @@
   \frametitle{Full Grid Discretization}
   \topline
   \vspace{-10px}
-  \begin{block}{3. Basis function (standard hat function)}
+  \begin{block}{Basis functions (standard hat function)}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -44,7 +44,7 @@
       \centering
       \includegraphics[width=7.5cm]{images/singlebasis_3}
       \vspace{-12px}
-      \caption{$\phi(x - 3)$ with $\phi(x) = \text{max}(|1 - x|, 0)$}
+      \caption{$\phi(x - 3)$ with $\phi(x) = \text{max}(1 - |x|, 0)$}
     \end{figure}
   \end{block}
 \end{frame}
@@ -53,7 +53,7 @@
   \frametitle{Full Grid Discretization}
   \topline
   \vspace{-10px}
-  \begin{block}{4. Coefficient $\alpha$ (Surplus)}
+  \begin{block}{4. Coefficient $\alpha$ (surplus)}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -70,7 +70,7 @@
   \frametitle{Full Grid Discretization}
   \topline
   \vspace{-10px}
-  \begin{block}{Sum over all basis functions}
+  \begin{block}{Sum over all weighted basis functions}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -87,7 +87,7 @@
   \frametitle{Full Grid Discretization}
   \topline
   \vspace{-10px}
-  \begin{block}{Sum over all basis functions}
+  \begin{block}{Sum over all weighted basis functions}
     \begin{figure}[!htp]
 
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
@@ -108,9 +108,9 @@
     \setbeamertemplate{enumerate items}[default]
     \begin{enumerate}
     \item A function $f(x)$ to discretize
-    \item Grid points indexed by $i \in \{1,2,\dots\}$
+    \item Grid points indexed by $i \in \{1,2,\dots ,N\}$
     \item Basis functions; i.e. hat function $\phi(x)=\text{max}(1 - |x|, 0)$
-    \item Coefficients $\alpha_i$ (Surpluses)
+    \item Coefficients $\alpha_i$ (surpluses)
     \end{enumerate}
     \vspace{10px}
     \begin{center}
@@ -125,14 +125,30 @@
   \vspace{-10px}
   \begin{block}{$d > 1$ dimensions}
     \begin{itemize}
-      \item Grid points as $d$--tuple, i.e. $(1,3,1)$
-      \item Tensor product over one dimensional basis functions
+      \item Grid points as index vector $\vec{i}$, i.e. $(1,3,1)$
+      \item Tensor product over the one dimensional basis functions
     \end{itemize}
     \begin{center}
-      $$ \phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i,j}(x_j)}$$
-      $$ f(\vec{x}) \approx \hat{f}(\vec{x}) =
-      \sum_i{\alpha_i\phi_i(\vec{x})}$$
+      $$ \phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i_j}(x_j)}$$
     \end{center}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Full Grid Discretization}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Tensor product for $d = 2$}
+
+    \begin{figure}[!htb]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/tensor.png}
+      \vspace{-12px}
+      \caption{$\phi_5(x_1) \cdot \phi_4(x_2)$}
+    \end{figure}
   \end{block}
 \end{frame}
 
@@ -188,10 +204,10 @@
   \vspace{-10px}
   \begin{block}{Summary}
     \begin{itemize}
-      \item Grid points $i \in \{1,2,\dots,N\}^d$ defining $\phi_i(x)$
+      \item \textbf{Grid points} $\vec{i} \in \{1,2,\dots,N\}^d$ defining $\phi_i(x)$
         \vspace{5px}
-        \item For $d > 1$: \textbf{product} of 1D basis functions: \\
-          $$\phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i,j}(x_j)}$$
+        \item \textbf{Product} of 1D basis functions: \\
+          $$\phi_i(\vec{x}) = \prod_{j=1}^d{\phi_{i_j}(x_j)}$$
         \item \textbf{Sum} over all weighted basis functions: \\
           $$\hat{f}(\vec{x}) = \sum_{i=1}^N{\alpha_i \phi_i(\vec{x})}$$
     \end{itemize}

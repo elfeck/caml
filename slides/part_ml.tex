@@ -9,9 +9,9 @@
     \end{itemize}
   \end{block}
     \begin{block}{Training-data}
-    $$ X = \{x^{(i)} \ | \ x^{(i)} \in [0, 1]^d\}_{i = 1}^M$$
+    $$ X = \{x^{(j)} \ | \ x^{(j)} \in [0, 1]^d\}_{j = 1}^M$$
     \vspace{0px}
-    $$Y = \{y^{(i)} \ | \ y^{(i)} \in \mathbb{R}\}_{i = 1}^M$$
+    $$Y = \{y^{(j)} \ | \ y^{(j)} \in \mathbb{R}\}_{j = 1}^M$$
   \end{block}
 \end{frame}
 
@@ -20,7 +20,7 @@
   \topline
   \vspace{-10px}
   \begin{block}{Least squares}
-    $$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{i = 1}^{M}{(y_i - f(x_i))^2 \ + \ \lambda ||\nabla f||} \Bigg)$$
+    $$\hat{c} = \underset{f}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}\sum\limits_{j = 0}^{M}{\Big(y^{(j)} - f(x^{(j)})\Big)^2 \ + \ \lambda R(f)} \Bigg)$$
   \end{block}
 \end{frame}
 
@@ -30,14 +30,13 @@
   \vspace{-10px}
   \begin{block}{Sparse grid setting}
     \begin{itemize}
-    \item Do least squares in a sparse grid setting (``space'')
+    \item Do least squares in a sparse grid setting
     \item Discretize $\hat{c}$ using a sparse grid
     \end{itemize}
-  \end{block}
-  \begin{block}{Least squares: Sparse gird discretized}
+    \vspace{20px}
     $$\hat{c} = \underset{\color{uipoppy}{\alpha}}{\text{arg \hspace{-0.5mm}min}}\Bigg(\frac{1}{M}
-    \sum\limits_{i = 1}^{M}{\Big(y_i - \color{uipoppy}{\sum_j{\alpha_j}\phi_j(x_i)}\color{black}\Big)^2 \ + \ 
-      \lambda \color{uipoppy}{\sum_j{\alpha_j^2}}}\color{black} \Bigg)$$
+    \sum\limits_{j = 0}^{M}{\Big(y^{(j)} - \color{uipoppy}{\sum_i{\alpha_i}\phi_i(x^{(j)})}\color{black}\Big)^2 \ + \ 
+      \lambda \color{uipoppy}{\sum_i{\alpha_i^2}}}\color{black} \Bigg)$$
   \end{block}
 \end{frame}
 
@@ -67,10 +66,17 @@
   \begin{block}{Observations}
     \begin{itemize}
     \item $ BB^T \in \mathbb{R}^{N \times N}$ where $N =$ number of grid points
-    \item Number of freedom not dependent on $M$
+    \item Number of freedoms not dependent on $M$
     \item Linear scaling in $M$
     \end{itemize}
   \end{block}
+  \begin{block}{Solving the system of linear equations}
+    \begin{itemize}
+    \item The SLE is not sparse but positive definite
+    \item Numerical methods like Conjugate Gradients (GC)
+    \end{itemize}
+  \end{block}
+
 \end{frame}
 
 %%% Local Variables:

@@ -72,7 +72,7 @@ amount of refinement steps can be determined using cross-validation.
 A straightforward way to refine grid points is to choose candidates
 with high surplus $\alpha$. %as discussed in Sec.~\ref{subsec:ada}
 For more
-details on the refining strategy refer to \cite{disspfl}.
+details on the choice of the refining strategy refer to \cite{disspfl}.
 \par
 First we examine the results of the checker-board dataset, a highly non-linear
 classification test set (see Fig.~\ref{fig:fig4}).
@@ -82,7 +82,9 @@ Starting with a maximal level of $n=4$ (49 grid points)
 the grid begins to capture the structure of the data with approximately
 70\% correct classifications.
 With a level of $n>7$ \ (796 grid points) more than 98\% are classified
-correctly \cite{disspfl}. This demonstrates the ability of sparse grids
+correctly \cite{disspfl}. In both cases the grid was refined 8 times. For each
+refinement-repetition the 5 grid points with the highest surplus $\alpha$ were chosen.
+This demonstrates the ability of sparse grids
 to model difficult non-linear datasets.
 \par
 
@@ -108,20 +110,22 @@ The second problem we examine is a real world regression
 task.
 A phenomenon similar to the doppler-effect called cosmological redshift
 is modeled. The training data consists of photometric measurements from known
-astronomical objects. By applying regression the redshift of
+astronomical objects. By applying regression, the redshift of
 newly observed objects is to be estimated using sparse grids.
 The dataset available contains 60,000 data points with 5 dimensions. Even though
 the shape of the data is inherently difficult to model, adaptive refinement
 helps to capture the core features. In contrast to the previous
 example, drastically more grid points are required to archive a low mean
 squared error. At approximately 20,000 grid points the error drops
-considerably. For more detailed examination refer to \cite{disspfl}.
+considerably. For a more detailed examination refer to \cite{disspfl}.
 \par
-Those two examples demonstrate that sparse grids are able to cope with
+These two examples demonstrate that sparse grids are able to cope with
 non-linear, large and moderately high dimensional datasets. As previously
 mentioned, spatial adaptivity is crucial to capture the features of the
 problem and enables sparse grids to be a competitive method for data mining
 and machine learning.
+
+%\subsection{Further considerations}
 
 %\begin{itemize}
 %\item Quick note on classification/regression

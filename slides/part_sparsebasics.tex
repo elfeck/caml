@@ -1,48 +1,18 @@
-\begin{frame}
-  \frametitle{Sparse Grids -- Basics}
-  \topline
-  \vspace{-10px}
-  \begin{block}{Hierarchical Basis}
-    \begin{figure}[!htp]
-      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
-      \setbeamerfont{caption}{size=\footnotesize}
-      \centering
-      \includegraphics[width=7.5cm]{images/sparse_hats}
-      \vspace{-12px}
-      \caption{}
-    \end{figure}
-  \end{block}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Sparse Grids -- Basics}
-  \topline
-  \vspace{-10px}
-  \begin{block}{Hierarchical basis (vs nodal basis)}
-    \begin{itemize}
-      \item Grouping grid points into levels $l \in \{1,2,3\dots , n\}$
-      \item Basis function by index \textbf{and} level: $\phi_{l,i}(x)$
-    \end{itemize}
-    \vspace{20px}
-      $$\hat{f}(x) = \sum_{l \leq n,i \in G_l}{\ \alpha_{l,i} \cdot \phi_{l,i}(x)}$$
-  \end{block}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Sparse Grids -- Basics}
-  \topline
-  \vspace{-10px}
-  \begin{block}{Hierarchical Basis}
-    \begin{figure}[!htp]
-      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
-      \setbeamerfont{caption}{size=\footnotesize}
-      \centering
-      \includegraphics[width=7.5cm]{images/sparse_hats}
-      \vspace{-12px}
-      \caption{}
-    \end{figure}
-  \end{block}
-\end{frame}
+%\begin{frame}
+%  \frametitle{Sparse Grids -- Basics}
+%  \topline
+%  \vspace{-10px}
+%  \begin{block}{Hierarchical Basis}
+%    \begin{figure}[!htp]
+%      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+%      \setbeamerfont{caption}{size=\footnotesize}
+%      \centering
+%      \includegraphics[width=7.5cm]{images/sparse_hats}
+%      \vspace{-12px}
+%      \caption{}
+%    \end{figure}
+%  \end{block}
+%\end{frame}
 
 \begin{frame}
   \frametitle{Sparse Grids -- Basics}
@@ -64,7 +34,38 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Full grid discretization: Hierarchical basis}
+  \begin{block}{Hierarchical basis}
+    \begin{itemize}
+      \item Grouping grid points into levels $l \in \{1,2,3\dots , n\}$
+      \item Basis function by index \textbf{and} level: $\phi_{l,i}(x)$
+    \end{itemize}
+    \vspace{20px}
+      $$\hat{f}(x) = \sum_{l \leq n,i \in G_l}{\ \alpha_{l,i} \cdot \phi_{l,i}(x)}$$
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Hierarchical Basis}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparse_hats}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Discretization with hierarchical basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -81,7 +82,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Full grid discretization: Hierarchical basis}
+  \begin{block}{Discretization with hierarchical basis}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -97,11 +98,11 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Basis function subspaces}
+  \begin{block}{Hierarchical basis for $d > 1$}
     \begin{itemize}
-      \item Combination of levels and dimensions
-      \item Notion of hierarchical subspaces
-      \item Defined by the levels of detail in all dimensions $(l_x, l_y, ...)$
+      \item Index and level vector $\vec{i}$, $\vec{l}$
+      \item Combination of levels in all dimensions
+      \item Notion of subspaces
     \end{itemize}
   \end{block}
 \end{frame}
@@ -110,7 +111,7 @@
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{Hierarchical grid points}
+  \begin{block}{Hierarchical basis: Grid points}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
@@ -121,6 +122,88 @@
     \end{figure}
   \end{block}
 \end{frame}
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sparse grid -- Changes}
+    \begin{itemize}
+      \item Certain subspaces get disregarded
+      \item Finding those is a \emph{a-priori} solvable optimization problem
+      \item The resulting grid is \textbf{sparse}
+      \end{itemize}
+  \end{block}
+  \begin{block}{Profit}
+    \begin{itemize}
+      \item Reducing the computational effort ``a lot''
+      \item Maintaining ``high'' accuracy
+      \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{A sparse grid}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=7.5cm]{images/sparsegrid_hirach2}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{A sparse grid}
+    \begin{table}[h]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \begin{tabular}{r | c | c | c | c | c | c}
+        d & 1 & 2 & 3 & 5 & 10 & 20 \\
+        \hline\hline
+        Full & 15 &  225 & 3375 & $>10^5$ & $> 10^{11}$ & $> 10^{23}$ \\
+        \hline
+        Sparse & 15 & 49 & 111 & 351 & 2001 & 13201 \\
+      \end{tabular}
+      \caption{Full grid vs. sparse grid with $n = 4$}
+    \end{table}
+    \begin{itemize}
+    \item Massive difference in high dimensions
+    \item Note: No boundary grid points!
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Sparse Grids -- Basics}
+  \topline
+  \vspace{-10px}
+  \begin{block}{Sparse grid for $n = \{4,5,6,7\}$}
+    \begin{figure}[!htp]
+      \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+      \setbeamerfont{caption}{size=\footnotesize}
+      \centering
+      \includegraphics[width=4cm]{images/sparsegrid_d4}
+      \includegraphics[width=4cm]{images/sparsegrid_d5}
+      \\
+      \includegraphics[width=4cm]{images/sparsegrid_d6}
+      \includegraphics[width=4cm]{images/sparsegrid_d7}
+      \vspace{-12px}
+      \caption{}
+    \end{figure}
+  \end{block}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Sparse Grids -- Basics}
@@ -138,61 +221,30 @@
   \end{block}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Sparse Grids -- Basics}
-  \topline
-  \vspace{-10px}
-  \begin{block}{Sparse grid -- Changes}
-    \begin{itemize}
-      \item Throwing away certain subspaces
-      \item Finding those is a \emph{a-priori} solvable optimization problem
-      \item The resulting grid is now \textbf{sparse}
-      \end{itemize}
-  \end{block}
-  \begin{block}{Profit}
-    \begin{itemize}
-      \item Reducing the computational effort ``a lot''
-      \item Maintaining ``high'' accuracy
-      \end{itemize}
-  \end{block}
-\end{frame}
 
 \begin{frame}
   \frametitle{Sparse Grids -- Basics}
   \topline
   \vspace{-10px}
-  \begin{block}{A \emph{sparse} grid}
+  \begin{block}{Adaptivity}
     \begin{figure}[!htp]
       \setbeamertemplate{caption}{\raggedright\insertcaption\par}
       \setbeamerfont{caption}{size=\footnotesize}
       \centering
-      \includegraphics[width=7.5cm]{images/sparsegrid_hirach2}
-      \vspace{-12px}
+      \includegraphics[width=0.2\textwidth]{images/adaptive_0}
+      \includegraphics[width=0.2\textwidth]{images/adaptive_1}
+      \includegraphics[width=0.2\textwidth]{images/adaptive_2}
       \caption{}
     \end{figure}
-  \end{block}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Sparse Grids -- Basics}
-  \topline
-  \vspace{-10px}
-  \begin{block}{Boundary and smoothness}
+    \vspace{-20px}
     \begin{itemize}
-      \item Boundaries need special treatment
-      \item The function needs to be sufficiently smooth \\
-        $D^2f$ needs to be bounded
-      \end{itemize}
-  \end{block}
-  \begin{block}{Adaptivity}
-    \begin{itemize}
-      \item \emph{A-posteriori} modifications to better fit the function
-      \item Picking a single grid point and adding level of detail around it
-      \item Prone to overfitting and huge computational effort
+      \item \emph{A-posteriori} modifications to model the function better
+      \item Adding level of detail around a grid point: $l + 1$
+      \item Overfitting possible and considerable computational effort
+      \item Multiple strategies possible
       \end{itemize}
   \end{block}
 \end{frame}
-
 
 \begin{frame}
   \frametitle{Sparse Grids -- Basics}
@@ -201,17 +253,12 @@
   \begin{block}{Summary}
     \begin{itemize}
       \item Hierarchical basis through grouping grid points into levels
-      \item Creating ``subspaces'' through combination of levels in dimensions
-      \item Selecting and combining subspaces
+      \item Creating subspaces through combination of levels in dimensions
+      \item Selecting only certain subspaces
+      \item Adaptive refinement
       \end{itemize}
-  \end{block}
-  \begin{block}{To keep in mind}
-    \begin{itemize}
-      \item Smoothness requirement for $f(x)$
-      \item Boundary treatment
-      \item Accuracy--effort trade-off
-      \item Adaptivity options (\emph{a-posteriori})
-      \end{itemize}
+      \vspace{20px}
+      $$\hat{f}(\vec{x}) = \sum_{l,i}{\alpha_{l,i} \phi_{l,i}(\vec{x})} $$
   \end{block}
 \end{frame}
 

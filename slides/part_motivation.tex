@@ -1,11 +1,11 @@
 \begin{frame}
-  \frametitle{Motivation for Sparse Grids}
+  \frametitle{Motivation}
   \topline
   \vspace{-10px}
   \begin{block}{Grid based approaches in ML}
     \begin{itemize}
       \item Discretizes the space into a grid
-      \item Basis--functions around grid points, not data points
+      \item Basis functions around grid points, not data points
     \end{itemize}
 
     \begin{figure}[!htb]
@@ -27,26 +27,25 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Motivation for Sparse Grids}
+  \frametitle{Motivation}
   \topline
   \vspace{-10px}
   \begin{block}{Suitable for}
     \begin{itemize}
-      \item Big datasets
-      \item Easily/automatically classifiable data
-      \item Medical, seismic, commercial data
+      \item Large, high-dimensional datasets
+      %\item Easily/automatically classifiable data
+      \item Medical data, seismic data, finance, astrophysics
     \end{itemize}
   \end{block}
   \begin{block}{Curse of dimensionality}
     \begin{itemize}
-    \item The volume of a space is exponential in it's dimensions
+    \item The volume of a space is exponential in its dimensions
     \item The amount of training data required becomes unmanageable
       \begin{itemize}
-      \item because of lacking computational/storage capacities
-      \item because data acquisition is expensive
+      \item because of lacking computational power and storage capacities
+      \item because data acquisition can be expensive
       \end{itemize}
     \item Becomes relevant for $d > 3$
-    \item \textbf{Applies to full-grid discretization}
     \end{itemize}
   \end{block}
 \end{frame}
