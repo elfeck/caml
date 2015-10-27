@@ -11,3 +11,10 @@
 /slides/tum.png
 /papers
 /tut
+
+/slides/slides.pdf
+/report/report.pdf
+
+slides/images/example*
+slides/images/impl_*
+report/images/figure_5*
